@@ -8,6 +8,9 @@ import { AppComponent } from './app.component';
 import { BarraComponent } from './componentes/barra/barra.component';
 import { EncabezadoComponent } from './componentes/encabezado/encabezado.component';
 import { AcercaDeComponent } from './componentes/acerca-de/acerca-de.component';
+import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
+import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,13 +18,16 @@ import { AcercaDeComponent } from './componentes/acerca-de/acerca-de.component';
     AppComponent,
     BarraComponent,
     EncabezadoComponent,
-    AcercaDeComponent
+    AcercaDeComponent,
+    IniciarSesionComponent,
+    PortfolioComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
