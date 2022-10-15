@@ -1,0 +1,94 @@
+<app-barra></app-barra>
+<div class="container d-flex justify-content-center ">
+
+
+
+    <form [formGroup]="editar" (ngSubmit)="onUpdate()" novalidate>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" formControlName="nombre" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched,'is-valid':!Nombre?.errors && Nombre?.touched}">
+        </div>
+        <div *ngIf="Nombre?.errors && Nombre?.touched" class="mb-3">
+            <p *ngIf="Nombre?.hasError('required')" class="text-danger">
+                El nombre es requerido
+            </p>
+        </div>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Apellido</label>
+            <input type="text" formControlName="apellido" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                [ngClass]="{'is-invalid':Apellido?.errors && Apellido?.touched,'is-valid':!Apellido?.errors && Apellido?.touched}">
+        </div>
+        <div *ngIf="Apellido?.errors && Apellido?.touched" class="mb-3">
+            <p *ngIf="Apellido?.hasError('required')" class="text-danger">
+                El Apellido es requerido
+            </p>
+        </div>
+        <div class="mb-3">
+            <label for="fechaNacimiento" class="form-label">Fecha Nacimiento</label>
+            <input type="date" formControlName="fecha_nacimiento" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp" >
+        </div>
+    
+    
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nacionalidad</label>
+            <input type="text" formControlName="nacionalidad" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp">
+        </div>
+    
+    
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Direccion</label>
+            <input type="text" formControlName="direccion" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Numero</label>
+            <input type="text" formControlName="numero" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp">
+        </div>
+    
+    
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Provincia</label>
+            <input type="text" formControlName="provincia" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp">
+        </div>
+    
+    
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Foto Portada</label>
+            <input  formControlName="foto_portada"  (change)="onFileChangedFotoPortada($event)" class="form-control" id="exampleInputEmail1"
+            type="file" accept=".jpeg,.jpg,.png" class="button"  >
+        </div>
+    
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Foto Perfil</label>
+            <input  formControlName="foto_perfil" class="form-control" id="exampleInputEmail1"
+            type="file" accept=".jpeg,.jpg,.png"  (change)="onFileChangedFotoPerfil($event)" class="button">
+        </div>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Sobre Mi</label>
+            <input type="text" formControlName="sobre_mi" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Ocupacion</label>
+            <input type="text" formControlName="ocupacion" class="form-control" id="exampleInputEmail1"
+                aria-describedby="emailHelp">
+        </div>
+    
+    
+    
+        <div class="mb-3">
+            <button type="submit" class="btn btn-outline-success  btn-block w-100" [disabled]="editar.invalid">
+               Actualizar
+            </button>
+        </div>
+    </form>
+    
+    
+</div>

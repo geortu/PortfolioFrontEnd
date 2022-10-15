@@ -1,17 +1,23 @@
+
 <div class="card mat-card">
     <div class="card-titles">
         <h2>Acerca de</h2>
-        <div class="btn-edit" >
-            <a href="#" class="btn-right">
-                <i class="fa fa-pen"></i>
-            </a>
-        </div>
+    <!--    <div class="btn-edit">-->
+         <a  class="btn-right">
+                <fa-icon [icon]="faPen" (click)="activarImput($event)"></fa-icon>
+         </a>
+      <!--   </div>-->
     </div>
-    <div>
-        <p id="text-acercade">Empleado Administrativo en la Escuela Tecnica Vial Gral Manuel Belgrano</p>
+
+    <div >
+         <p id="text-acercade">{{sobre_mi}}</p>      
     </div>
-    <div>
-        <input class="form-control" id="edit-acercade" type="text"  placeholder="Agrega un texto" style="display:none" >
+    <div *ngIf="isActivo">
+        <form [formGroup]="form" (ngSubmit)="onUpdate()" novalidate>
+            <input class="form-control" id="edit-acercade" type="text" formControlName="sobre_mi"
+                placeholder="Agrega un texto">
+            <button type="submit" class="btn btn-outline-success"> Guardar </button>
+        </form>
     </div>
-   
-   </div>
+
+</div>

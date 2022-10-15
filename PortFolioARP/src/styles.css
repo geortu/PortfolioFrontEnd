@@ -7,10 +7,12 @@
 .mat-card#first.card{
     padding: 0 ;
 }
+
 div#profile-bacgraund {
     display: flex;
     z-index: 1;
 }
+
 div#profile-bacgraund img{
     width: 100%;
     border-radius: 32px 32px 0 0;
@@ -100,4 +102,8 @@ ul.items-list li div.data-container a{
 .card-titles{
     display: flex;
     justify-content:space-between;
+}
+
+.nav.nav-tabs.bg-dark > .active > a {
+    color: white;
 }
