@@ -1,35 +1,41 @@
 <div class="card mat-card" id="first-card">
-    <div id="profile-background"> <img [src]="foto_portada" alt="" width="100%" height="300"></div>    
-<div id="info">
-  <div id="info-img">
-      <img class="profile-image" [src]="foto_perfil" alt="">
-      <div class="btn-edit"><a routerLink="/editar-persona" class="btn-rigth"><fa-icon [icon]="faPen"></fa-icon> </a></div>          
+    <div id="profile-background" >
+        <img [src]="foto_portada"   alt="" width="100%" height="300">
 
-       
-  </div>  
-  <div id="info-data">
-      <div>
-          <h1>{{miPortfolio.nombre +" "+ miPortfolio.apellido}}</h1>
-          <div id="info-company">{{miPortfolio.ocupacion}}</div>
-          <div id="info-contact">
-              <span>{{miPortfolio.domicilio.provincia +"("+ miPortfolio.nacionalidad + ")"}}</span>
-              <span><a href="#">Informacion de Contacto</a></span>
-         </div>
-  </div>
-      <ul id="info-details">
-          <li>
-              <a href="#">
-                  <img src="">
-                  <h2>U.N.T</h2>
-              </a>
-          </li>
-      </ul>
-  </div> 
-  <div id="info-actions">
-      <button type="button" class="btn btn-primary">Tengo interes en</button>
-      <button type="button" class="btn btn-light">Añadir Seccion</button>
-      <button type="button" class="btn btn-light">Mas</button>
-  </div>  
-    
-</div>
+    </div>
+    <div id="info">
+        <div id="info-img">
+            <img class="profile-image" [src]="foto_perfil" alt="">
+            <div class="btn-edit"><a routerLink="/editar-persona" class="btn-rigth">
+                    <fa-icon [icon]="faPen"></fa-icon>
+                </a>
+            </div>
+
+
+        </div>
+        <div id="info-data">
+            <div>
+                <h1>{{miPortfolio.nombre +" "+ miPortfolio.apellido}}</h1>
+                <div id="info-company">{{miPortfolio.ocupacion}}</div>
+                <div id="info-contact">
+                    <span>{{miPortfolio.domicilio.provincia +"("+ miPortfolio.nacionalidad + ")"}}</span>
+                    <span><a href="#">Informacion de Contacto</a></span>
+                </div>
+            </div>
+            <ul id="info-details">
+                <li>
+                    <a href="/">
+                        <img src="assets/Logo-AH-01.jpg">
+                        <h2>U.N.T</h2>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="info-actions">
+            <button type="button" class="btn btn-primary">Tengo interes en</button>
+            <button type="button" class="btn btn-light">Añadir Seccion</button>
+            <button type="button" class="btn btn-light">Mas</button>
+        </div>
+
+    </div>
 </div>

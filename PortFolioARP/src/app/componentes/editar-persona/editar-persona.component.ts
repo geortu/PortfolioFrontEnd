@@ -50,8 +50,8 @@ export class EditarPersonaComponent implements OnInit {
       var splitted = fechaNacimiento.split("/");
       var nuevaFecha=splitted[2]+"-"+splitted[1]+"-"+splitted[0];
      
-     
-      
+      this.selectedFotoPerfil=data.foto_perfil
+      this.selectedFotoPortada=data.foto_portada;   
       
       
       
@@ -61,9 +61,7 @@ export class EditarPersonaComponent implements OnInit {
       this.editar.controls['fecha_nacimiento'].setValue(nuevaFecha);
       this.editar.controls['nacionalidad'].setValue(data.nacionalidad);
       this.editar.controls['direccion'].setValue(data.domicilio.direccion);
-      this.editar.controls['numero'].setValue(data.domicilio.numero);
-     // this.editar.controls['foto_portada'].setValue(data.foto_portada);
-     // this.editar.controls['foto_perfil'].setValue(data.foto_perfil);
+      this.editar.controls['numero'].setValue(data.domicilio.numero);    
       this.editar.controls['provincia'].setValue(data.domicilio.provincia);
       this.editar.controls['sobre_mi'].setValue(data.sobre_mi);
       this.editar.controls['ocupacion'].setValue(data.ocupacion);
@@ -81,6 +79,18 @@ export class EditarPersonaComponent implements OnInit {
   }
   get Apellido(){
     return this.editar.get('apellido')
+  }
+  get Nacionalidad(){
+    return this.editar.get('nacionalidad')
+  }
+  get Direccion(){
+    return this.editar.get('direccion')
+  }
+  get Provincia(){
+    return this.editar.get('provincia')
+  }
+  get NUmero(){
+    return this.editar.get('numero')
   }
   public onFileChangedFotoPerfil(event:any) {
     //Select File

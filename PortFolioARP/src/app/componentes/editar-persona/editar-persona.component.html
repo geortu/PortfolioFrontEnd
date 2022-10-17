@@ -3,87 +3,107 @@
 
 
 
-    <form [formGroup]="editar" (ngSubmit)="onUpdate()" novalidate>
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" formControlName="nombre" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched,'is-valid':!Nombre?.errors && Nombre?.touched}">
-        </div>
-        <div *ngIf="Nombre?.errors && Nombre?.touched" class="mb-3">
-            <p *ngIf="Nombre?.hasError('required')" class="text-danger">
-                El nombre es requerido
-            </p>
-        </div>
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Apellido</label>
-            <input type="text" formControlName="apellido" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                [ngClass]="{'is-invalid':Apellido?.errors && Apellido?.touched,'is-valid':!Apellido?.errors && Apellido?.touched}">
-        </div>
-        <div *ngIf="Apellido?.errors && Apellido?.touched" class="mb-3">
-            <p *ngIf="Apellido?.hasError('required')" class="text-danger">
-                El Apellido es requerido
-            </p>
-        </div>
-        <div class="mb-3">
+    <form [formGroup]="editar" class="row g-3"  (ngSubmit)="onUpdate()" novalidate>
+       
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+            
+                <input type="text" formControlName="nombre" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched,'is-valid':!Nombre?.errors && Nombre?.touched}">
+            
+            
+                <div *ngIf="Nombre?.errors && Nombre?.touched" class="mb-3">
+                    <span *ngIf="Nombre?.hasError('required')" class="text-danger">
+                        El nombre es requerido
+                    </span>
+                </div>
+            </div>
+       
+       
+            <div class="col-md-6">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" formControlName="apellido" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    [ngClass]="{'is-invalid':Apellido?.errors && Apellido?.touched,'is-valid':!Apellido?.errors && Apellido?.touched}">
+            
+                <div *ngIf="Apellido?.errors && Apellido?.touched" class="mb-3">
+                    <span *ngIf="Apellido?.hasError('required')" class="text-danger">
+                        El Apellido es requerido
+                    </span>
+                </div>
+            </div>
+        
+        <div class="col-md-6">
             <label for="fechaNacimiento" class="form-label">Fecha Nacimiento</label>
-            <input type="date" formControlName="fecha_nacimiento" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp" >
+            <input type="date" formControlName="fecha_nacimiento" class="form-control"  
+                >
         </div>
     
     
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nacionalidad</label>
-            <input type="text" formControlName="nacionalidad" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
+        <div class="col-md-6">
+            <label for="nacionalidad" class="form-label">Nacionalidad</label>
+            <input type="text" formControlName="nacionalidad" class="form-control" 
+            [ngClass]="{'is-invalid':Nacionalidad?.errors && Nacionalidad?.touched,
+            'is-valid':!Nacionalidad?.errors && Nacionalidad?.touched}">
+            <div *ngIf="Nacionalidad?.errors && Nacionalidad?.touched" class="mb-3">
+                <span *ngIf="Nacionalidad?.hasError('required')" class="text-danger">
+                    La Nacionalidad es requerida
+                </span>
+            </div>
+        </div>
+
+
+        <div class="col-md-5">
+            <label for="provincia" class="form-label">Provincia</label>
+            <input type="text" formControlName="provincia" class="form-control" [ngClass]="{'is-invalid':Provincia?.errors && Provincia?.touched,
+                        'is-valid':!Provincia?.errors && Provincia?.touched}">
+            <div *ngIf="Provincia?.errors && Provincia?.touched" class="mb-3">
+                <span *ngIf="Provincia?.hasError('required')" class="text-danger">
+                    La Provincia es requerida
+                </span>
+            </div>
         </div>
     
-    
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Direccion</label>
+        <div class="col-md-5">
+            <label for="direccion" class="form-label">Direccion</label>
             <input type="text" formControlName="direccion" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
         </div>
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Numero</label>
+        <div class="col-md-2">
+            <label for="numero" class="form-label">Numero</label>
             <input type="text" formControlName="numero" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
         </div>
     
     
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Provincia</label>
-            <input type="text" formControlName="provincia" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
-        </div>
+        
     
     
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Foto Portada</label>
+        <div class="col-md-12">
+            <label for="foto_portada" class="form-label">Foto Portada</label>
             <input  formControlName="foto_portada"  (change)="onFileChangedFotoPortada($event)" class="form-control" id="exampleInputEmail1"
-            type="file" accept=".jpeg,.jpg,.png" class="button"  >
+            type="file" accept=".jpeg,.jpg,.png" class="form-control"  >
         </div>
     
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Foto Perfil</label>
+        <div class="col-md-12">
+            <label for="foto_perfil" class="form-label">Foto Perfil</label>
             <input  formControlName="foto_perfil" class="form-control" id="exampleInputEmail1"
-            type="file" accept=".jpeg,.jpg,.png"  (change)="onFileChangedFotoPerfil($event)" class="button">
+            type="file" accept=".jpeg,.jpg,.png"  (change)="onFileChangedFotoPerfil($event)" class="form-control">
         </div>
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Sobre Mi</label>
-            <input type="text" formControlName="sobre_mi" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp">
+        <div class="col-md-12">
+            <label for="sobre_mi" class="form-label">Sobre Mi</label>
+        <!--  <input type="text"  class="form-control" formControlName="sobre_mi" >--> 
+            <textarea class="form-control"  formControlName="sobre_mi" ></textarea>
         </div>
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Ocupacion</label>
+        <div class="col-md-12">
+            <label for="ocupacion" class="form-label">Ocupacion</label>
             <input type="text" formControlName="ocupacion" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
-        </div>
+        </div>   
     
     
-    
-        <div class="mb-3">
+        <div class="col-md-12">
             <button type="submit" class="btn btn-outline-success  btn-block w-100" [disabled]="editar.invalid">
                Actualizar
             </button>

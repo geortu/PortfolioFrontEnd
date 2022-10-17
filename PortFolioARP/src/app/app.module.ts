@@ -16,6 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PortfolioService } from './servicio/portfolio.service';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { EditarPersonaComponent } from './componentes/editar-persona/editar-persona.component';
+import { ExperiencialaboralComponent } from './componentes/experiencialaboral/experiencialaboral.component';
+import { EducacionComponent } from './componentes/educacion/educacion.component';
 
 
 @NgModule({
@@ -26,7 +28,7 @@ import { EditarPersonaComponent } from './componentes/editar-persona/editar-pers
     AcercaDeComponent,
     IniciarSesionComponent,
     PortfolioComponent,  
-    RegistroComponent, EditarPersonaComponent
+    RegistroComponent, EditarPersonaComponent, ExperiencialaboralComponent, EducacionComponent
   ],
   imports: [
     BrowserModule,

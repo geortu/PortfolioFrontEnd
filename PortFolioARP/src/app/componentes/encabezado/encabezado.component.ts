@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PortfolioService } from 'src/app/servicio/portfolio.service';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
+
 import { Token } from '@angular/compiler';
 import { TokenService } from 'src/app/servicio/token.service';
 import { Observable, Subscriber } from 'rxjs';

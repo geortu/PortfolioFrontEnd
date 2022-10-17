@@ -8,7 +8,7 @@ import { GuardGuard } from './servicio/guard.guard';
 
 
 const routes: Routes = [
-  {path:'portfolio',component:PortfolioComponent },
+  {path:'portfolio',component:PortfolioComponent,canActivate:[GuardGuard] },
   {path:'iniciar-sesion',component:IniciarSesionComponent},
   {path:'registro',component:RegistroComponent},
   {path:'editar-persona',component:EditarPersonaComponent},
