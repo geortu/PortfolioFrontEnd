@@ -74,8 +74,7 @@
             <label for="numero" class="form-label">Numero</label>
             <input type="text" formControlName="numero" class="form-control" id="exampleInputEmail1"
                 aria-describedby="emailHelp">
-        </div>
-    
+        </div>  
     
         
     
@@ -103,11 +102,12 @@
         </div>   
     
     
-        <div class="col-md-12">
-            <button type="submit" class="btn btn-outline-success  btn-block w-100" [disabled]="editar.invalid">
+        <div class="col-md-5">
+            <button type="submit" class="btn btn-primary" [disabled]="editar.invalid">
                Actualizar
             </button>
         </div>
+       
     </form>
     
     

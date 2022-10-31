@@ -4,7 +4,7 @@
 
             <h2>Experinecias</h2>
             <div class="btn-edit">
-                <a href="" class="btn-rigth">
+                <a routerLink="/nueva-experiencia/{{id_persona?}}" class="btn-rigth">
                     <fa-icon [icon]="faPlus"></fa-icon>
                 </a>
             </div>
@@ -15,29 +15,28 @@
 
     <div>
         <ul class="items-list">
-            <li>
+            <li *ngFor="let experiencia of experiencias">
                 <div class="data-container">
-                    <a href="/">
+                    <a href="#">
                         <div class="logo-image-container">
-                            <img  src="assets/Logo-AH-01.jpg" alt="">
+                            <img  [src]="experiencia.logo" alt="">
                         </div>
                         <div class="list-info">
-                            <h3>Jefe de Tesoreria</h3>
-                             <p>Facultad de Ciencias Exactas</p>
-                            <h5><time>2006</time> - <time>2022</time></h5>
+                            <h3>{{experiencia.puesto}}</h3>
+                             <p>{{experiencia.nombre_empresa}}</p>
+                            <h5><time>{{experiencia.fecha_inicio}}</time> - <time>{{experiencia.fecha_fin}}</time></h5>
                         </div>
 
                     </a>
                 </div>
                 <div class="data-control">
                     <div class="btn-edit">
-                        <a href="/" class="btn-rigth">
+                        <a routerLink="/editar-expereincialaboral/{{experiencia.id}}" class="btn-rigth">
                             <fa-icon [icon]="faPen"></fa-icon>
-                        </a>
-                       
+                        </a>                       
                     </div>
                     <div>
-                        <a href="/" class="btn-rigth">
+                        <a (click)="borrarExperiencia(experiencia.id)" class="btn-rigth">
                             <fa-icon [icon]="faTrash"></fa-icon>
                         </a>
 

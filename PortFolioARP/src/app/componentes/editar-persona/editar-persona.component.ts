@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/servicio/token.service';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PortfolioService } from 'src/app/servicio/portfolio.service';
 import { Observable, Subscriber } from 'rxjs';
 import { PersonaDto } from 'src/app/model/persona-dto';
@@ -17,11 +17,11 @@ export class EditarPersonaComponent implements OnInit {
   //id_domicilio?:number;
   selectedFotoPerfil!:File ;
   selectedFotoPortada!:File;
-  myimage!: Observable<any>;
-  base64code: any;
+  user:string="";
+  
   
 
-  constructor(private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router  ) { 
+  constructor(private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router  ) { 
     this.editar=this.FormBuilder.group(
       {
         
@@ -44,21 +44,20 @@ export class EditarPersonaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    this.portFolioService.obtenerPersona(this.tokenService.getUserName()).subscribe(data=>{
-      var fechaNacimiento=data.fecha_nacimiento;
-      var splitted = fechaNacimiento.split("/");
-      var nuevaFecha=splitted[2]+"-"+splitted[1]+"-"+splitted[0];
-     
-      this.selectedFotoPerfil=data.foto_perfil
-      this.selectedFotoPortada=data.foto_portada;   
+    const id = this.activatedRoute.snapshot.params['id']
+    //this.portFolioService.obtenerPersona(this.tokenService.getUserName()).subscribe
+   
+     this.portFolioService.optenerPersonaById(id).subscribe(data=>{
+     this.user=data.email;
       
+      //this.selectedFotoPerfil=this.portFolioService.convertirBase64( data.foto_perfil);
+      //this.selectedFotoPortada=this.portFolioService.convertirBase64(data.foto_portada);    
       
       
      
       this.editar.controls['nombre'].setValue(data.nombre);
       this.editar.controls['apellido'].setValue(data.apellido);
-      this.editar.controls['fecha_nacimiento'].setValue(nuevaFecha);
+      this.editar.controls['fecha_nacimiento'].setValue(this.portFolioService.obtenerFecha(data.fecha_nacimiento));
       this.editar.controls['nacionalidad'].setValue(data.nacionalidad);
       this.editar.controls['direccion'].setValue(data.domicilio.direccion);
       this.editar.controls['numero'].setValue(data.domicilio.numero);    
@@ -106,30 +105,7 @@ export class EditarPersonaComponent implements OnInit {
 
   }
 
-  convertToBase64(file: File) {
-    const observable = new Observable((subscriber: Subscriber<any>) => {
-      this.readFile(file, subscriber);
-    });
- 
-    observable.subscribe((d) => {
-      console.log(d)
-      this.myimage = d
-      this.base64code = d
-    })
-  }
-  readFile(file: File, subscriber: Subscriber<any>) {
-    const filereader = new FileReader();
-    filereader.readAsDataURL(file);
- 
-    filereader.onload = () => {
-      subscriber.next(filereader.result);
-      subscriber.complete();
-    };
-    filereader.onerror = (error) => {
-      subscriber.error(error);
-      subscriber.complete();
-    };
-  }
+  
   onUpdate(): void {
    
     const formData=new FormData();
@@ -144,11 +120,13 @@ export class EditarPersonaComponent implements OnInit {
     formData.append('apellido',this.editar.get('apellido')?.value);
     formData.append('nacionalidad',this.editar.get('nacionalidad')?.value);
     formData.append('fecha_nacimiento',this.editar.get('fecha_nacimiento')?.value);
-   
+     
     
    this.portFolioService.upDate(this.id,formData).subscribe();
+     
    
-    this.ruta.navigate(['/portfolio']);
+   //this.ruta.navigate(['/portfolio']);
+   this.ruta.navigate(['/'+`portfolio/${this.user}`]);
 
    }
 

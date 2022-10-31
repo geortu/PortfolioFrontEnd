@@ -21,6 +21,7 @@ export class IniciarSesionComponent implements OnInit {
   loginUsuario:LoginUsuario | undefined;
   roles:string[]=[];
   errMsj:string="";
+  user:string="";
   
 
   constructor(private FormBuilder:FormBuilder, private tokenService:TokenService,private autenticationservice: AutenticacionService, private ruta:Router ) { 
@@ -57,7 +58,7 @@ export class IniciarSesionComponent implements OnInit {
       this.autenticationservice.IniciarSesion(this.form.value).subscribe(data=>{
         console.log("DATA "+ JSON.stringify(data));
        
-        this.ruta.navigate(['/portfolio']);
+       // this.ruta.navigate(['/'+`portfolio/${email}`]);
       })
     }
     onLogin():void{
@@ -72,12 +73,15 @@ export class IniciarSesionComponent implements OnInit {
         this.tokenService.setUserName(data.nombreUsuario);
         this.tokenService.setAuthorities(data.authorities);
         this.roles=data.authorities;
-        this.ruta.navigate(['/portfolio']);
+        this.user=this.tokenService.getUserName();
+        //this.ruta.navigate(['/portfolio']);
+        this.ruta.navigate(['/'+`portfolio/${this.user}`]);
       },  
         err=>{
+        
           this.isLogged=false;
           this.isLoginFail=true;
-          this.errMsj="No Autorizado";
+          this.errMsj=err.error.error;
           
         }
        

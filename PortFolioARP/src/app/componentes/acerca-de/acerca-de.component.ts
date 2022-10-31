@@ -22,7 +22,8 @@ export class AcercaDeComponent implements OnInit {
    formData:FormData;
 
   constructor(private portfolioService:PortfolioService,
-    private tokenServicio:TokenService,        
+    private tokenServicio:TokenService,
+    private activatedRoute: ActivatedRoute,        
     private router: Router,
     private FormBuilder:FormBuilder) {  
       this.form=this.FormBuilder.group(
@@ -36,8 +37,8 @@ export class AcercaDeComponent implements OnInit {
     }
 
   ngOnInit(): void {
-           let user=this.tokenServicio.getUserName(); 
-                 
+          // let user=this.tokenServicio.getUserName(); 
+          /* const user = this.activatedRoute.snapshot.params['user'];     
             this.portfolioService.obtenerPersona(user).subscribe(data=>{
             this.sobre_mi=data.sobre_mi;    
             this.formData.append('ocupacion',data.ocupacion);
@@ -47,9 +48,19 @@ export class AcercaDeComponent implements OnInit {
             this.formData.append('nombre',data.nombre);
             this.formData.append('apellido',data.apellido);
             this.formData.append('nacionalidad',data.nacionalidad);
-            this.formData.append('fecha_nacimiento',data.fecha_nacimiento);
-          
-            this.id=data.id;
+            this.formData.append('fecha_nacimiento',data.fecha_nacimiento);          
+            this.id=data.id;*/
+            this.portfolioService.obtenerDatos().subscribe(data=>{
+              this.sobre_mi=data[0].sobre_mi;    
+              this.formData.append('ocupacion',data[0].ocupacion);
+              this.formData.append('direccion',data[0].domicilio.direccion);
+              this.formData.append('numero',data[0].domicilio.numero);
+              this.formData.append('provincia',data[0].domicilio.provincia);
+              this.formData.append('nombre',data[0].nombre);
+              this.formData.append('apellido',data[0].apellido);
+              this.formData.append('nacionalidad',data[0].nacionalidad);
+              this.formData.append('fecha_nacimiento',data[0].fecha_nacimiento);          
+              this.id=data[0].id;
         
 
         });
@@ -62,7 +73,7 @@ export class AcercaDeComponent implements OnInit {
             this.portfolioService.upDate(this.id,this.formData).subscribe();
             this.isActivo=false;
 
-           //window.location.reload();
+          
       
     }
     getSobreMi(){

@@ -18,6 +18,11 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 import { EditarPersonaComponent } from './componentes/editar-persona/editar-persona.component';
 import { ExperiencialaboralComponent } from './componentes/experiencialaboral/experiencialaboral.component';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
+import { EditarExpereincialaboralComponent } from './componentes/editar-expereincialaboral/editar-expereincialaboral.component';
+import { NuevaExperienciaComponent } from './componentes/nueva-experiencia/nueva-experiencia.component';
+import { NuevaEducacionComponent } from './componentes/nueva-educacion/nueva-educacion.component';
+import { EditarEducacionComponent } from './componentes/editar-educacion/editar-educacion.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -28,7 +33,7 @@ import { EducacionComponent } from './componentes/educacion/educacion.component'
     AcercaDeComponent,
     IniciarSesionComponent,
     PortfolioComponent,  
-    RegistroComponent, EditarPersonaComponent, ExperiencialaboralComponent, EducacionComponent
+    RegistroComponent, EditarPersonaComponent, ExperiencialaboralComponent, EducacionComponent, EditarExpereincialaboralComponent, NuevaExperienciaComponent, NuevaEducacionComponent, EditarEducacionComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,8 @@ import { EducacionComponent } from './componentes/educacion/educacion.component'
    // FormsModule
   ],
   providers: [PortfolioService, 
-            {provide: HTTP_INTERCEPTORS,useClass:InterceptorService, multi:true } ],
+            {provide: HTTP_INTERCEPTORS,useClass:InterceptorService, multi:true },DatePipe ],
+            
   bootstrap: [AppComponent]
 })
 export class AppModule { }

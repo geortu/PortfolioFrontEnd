@@ -6,7 +6,7 @@
     <div id="info">
         <div id="info-img">
             <img class="profile-image" [src]="foto_perfil" alt="">
-            <div class="btn-edit"><a routerLink="/editar-persona" class="btn-rigth">
+            <div class="btn-edit"><a routerLink="/editar-persona/{{miPortfolios.id}}" class="btn-rigth">
                     <fa-icon [icon]="faPen"></fa-icon>
                 </a>
             </div>
@@ -15,10 +15,10 @@
         </div>
         <div id="info-data">
             <div>
-                <h1>{{miPortfolio.nombre +" "+ miPortfolio.apellido}}</h1>
-                <div id="info-company">{{miPortfolio.ocupacion}}</div>
+                <h1>{{miPortfolios.nombre +" "+ miPortfolios.apellido}}</h1>
+                <div id="info-company">{{miPortfolios.ocupacion}}</div>
                 <div id="info-contact">
-                    <span>{{miPortfolio.domicilio.provincia +"("+ miPortfolio.nacionalidad + ")"}}</span>
+                    <span>{{miPortfolios?.domicilio?.provincia +"("+ miPortfolios.nacionalidad + ")"}}</span>
                     <span><a href="#">Informacion de Contacto</a></span>
                 </div>
             </div>

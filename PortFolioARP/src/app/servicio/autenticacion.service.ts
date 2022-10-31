@@ -13,7 +13,7 @@ export class AutenticacionService {
 url="http://localhost:8080/auth/";
 currentUserSubject:BehaviorSubject<any>;
   constructor(private http:HttpClient) { 
-   console.log("El servicio de autenticacion esta corriendo");
+   //console.log("El servicio de autenticacion esta corriendo");
   
   this.currentUserSubject=new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem("currentSubjet") ||'{}'));
   
@@ -33,9 +33,8 @@ currentUserSubject:BehaviorSubject<any>;
   public nuevo(nuevoUsuario:NuevoUsuario):Observable<any>{
     return this.http.post<any>(this.url+'nuevo',nuevoUsuario);
   }
-  public login(loginUsuario:LoginUsuario):Observable<JwtDto>{
-   
-    return this.http.post<JwtDto>(this.url+'login',loginUsuario);
+  public login(loginUsuario:LoginUsuario):Observable<JwtDto>{   
+   return this.http.post<JwtDto>(this.url+'login',loginUsuario);
   }
   
 }
