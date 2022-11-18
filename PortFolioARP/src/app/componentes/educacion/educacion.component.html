@@ -3,8 +3,8 @@
         <div class="card-titles">
 
             <h2>Educacion</h2>
-            <div class="btn-edit">
-                <a href="" class="btn-rigth">
+            <div class="btn-edit" *ngIf="isLogged">
+                <a routerLink="/nueva-educacion/{{id_persona}}" class="btn-rigth">
                     <fa-icon [icon]="faPlus"></fa-icon>
                 </a>
             </div>
@@ -15,29 +15,28 @@
 
     <div>
         <ul class="items-list">
-            <li>
+            <li *ngFor="let educacion of educaciones">
                 <div class="data-container">
-                    <a href="/">
+                    <a href="#">
                         <div class="logo-image-container">
-                            <img  src="assets/Logo-AH-01.jpg" alt="">
+                            <img  [src]="educacion.logo" alt="">
                         </div>
                         <div class="list-info">
-                            <h3>Facultad de Ciencias Economicas</h3>
-                             <p>Licenciado en Administracion</p>
-                           <p> <time>2006</time> - <time>2022</time></p>
+                            <h3>{{educacion.establecimiento}}</h3>
+                             <p>{{educacion.titulo}}</p>
+                            <h5><time>{{educacion.inicio}}</time> - <time>{{educacion.fin}}</time></h5>
                         </div>
 
                     </a>
                 </div>
-                <div class="data-control">
+                <div class="data-control" *ngIf="isLogged">
                     <div class="btn-edit">
-                        <a href="/" class="btn-rigth">
+                        <a routerLink="/editar-educacion/{{educacion.id}}" class="btn-rigth">
                             <fa-icon [icon]="faPen"></fa-icon>
-                        </a>
-                       
+                        </a>                       
                     </div>
                     <div>
-                        <a href="/" class="btn-rigth">
+                        <a (click)="borrarEducacion(educacion.id)" class="btn-rigth">
                             <fa-icon [icon]="faTrash"></fa-icon>
                         </a>
 

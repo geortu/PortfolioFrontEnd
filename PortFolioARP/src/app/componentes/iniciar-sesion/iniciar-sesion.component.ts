@@ -36,7 +36,7 @@ export class IniciarSesionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.tokenService.getToken == null){
+    if(this.tokenService.getToken() == null){
       this.isLogged= true;
       this.isLoginFail=false;
       this. roles=this.tokenService.getAuthorities();
@@ -74,8 +74,8 @@ export class IniciarSesionComponent implements OnInit {
         this.tokenService.setAuthorities(data.authorities);
         this.roles=data.authorities;
         this.user=this.tokenService.getUserName();
-        //this.ruta.navigate(['/portfolio']);
-        this.ruta.navigate(['/'+`portfolio/${this.user}`]);
+        this.ruta.navigate(['/portfolio']);
+        //this.ruta.navigate(['/'+`portfolio/${this.user}`]);
       },  
         err=>{
         

@@ -3,7 +3,7 @@
     <div class="card-titles">
         <h2>Acerca de</h2>
     <!--    <div class="btn-edit">-->
-         <a  class="btn-right">
+         <a  class="btn-right" *ngIf="isLogged">
                 <fa-icon [icon]="faPen" (click)="activarImput($event)"></fa-icon>
          </a>
       <!--   </div>-->
@@ -16,7 +16,7 @@
         <form [formGroup]="form" (ngSubmit)="onUpdate()" novalidate>
             <input class="form-control" id="edit-acercade" type="text" formControlName="sobre_mi"
                 placeholder="Agrega un texto">
-            <button type="submit" class="btn btn-outline-success"> Guardar </button>
+            <button style="margin-top:10px" type="submit" class="btn btn-primary"> Guardar </button>
         </form>
     </div>
 

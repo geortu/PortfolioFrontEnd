@@ -20,6 +20,7 @@ export class EditarExpereincialaboralComponent implements OnInit {
   isFechaInicio:boolean=false;
   fechaInicio:string="";
   fechaFin:string="";
+  path="experiencia";
 
   constructor(private date:DatePipe,private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router  ) {
     this.editar=this.FormBuilder.group(
@@ -41,9 +42,9 @@ export class EditarExpereincialaboralComponent implements OnInit {
 
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.params['id'];
-    this.portFolioService.obtenerExperienciasById(this.id).subscribe(data =>{
+    this.portFolioService.obtenerById(this.id,this.path).subscribe(data =>{
       
-      this.user=data.persona.email;
+      //this.user=data.persona.email;
       this.editar.controls['nombre_empresa'].setValue(data.nombre_empresa);
       this.editar.controls['puesto'].setValue(data.puesto);
       this.editar.controls['fecha_inicio'].setValue(this.portFolioService.obtenerFecha(data.fecha_inicio));
@@ -125,10 +126,10 @@ onUpdate(): void {
   
    
   
- this.portFolioService.actualizarExperiencia(this.id,formData).subscribe();
+ this.portFolioService.actualizar(this.id,formData,this.path).subscribe();
    
  
- //this.ruta.navigate(['/portfolio']);
+ this.ruta.navigate(['/portfolio']);
  //this.ruta.navigate(['/'+`portfolio/${this.user}`]);
 
  }
@@ -142,8 +143,7 @@ onUpdate(): void {
     this.fecha=this.date.transform(f,'yyyy-MM-dd');
     
   }
-  console.log(this.fechaInicio);
-  console.log(this.fechaFin);
+  
 
  
  
@@ -157,5 +157,10 @@ onUpdate(): void {
   
   
  }
+ cancelar(){
+  this.editar.reset();
+  this.ruta.navigate(['/portfolio']);
+
+}
 
 }

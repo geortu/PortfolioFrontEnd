@@ -17,6 +17,7 @@ export class EncabezadoComponent implements OnInit {
    faPen=faPen;   
    foto_perfil:any;
    foto_portada:any;
+   isLogged=false;
   
  
   
@@ -26,14 +27,14 @@ export class EncabezadoComponent implements OnInit {
   }
 
   ngOnInit(): void {   
+    this.isLogged=this.tokenService.getToken()==null? false:true;
       // const user = this.activatedRoute.snapshot.params['user'];
       //console.log(id);
       //const user=this.tokenService.getUserName();
       //this.datosPortfolios.obtenerPersona(user).subscribe(data=>{   
        this.datosPortfolios.obtenerDatos().subscribe(data=>{    
        this.miPortfolios=data[0];
-      //this.miPortfolios=data;
-      console.log(this.miPortfolios);
+      //this.miPortfolios=data;     
       this.foto_perfil=this.datosPortfolios.convertirBase64(this.miPortfolios.foto_perfil) ;  
       this.foto_portada= this.datosPortfolios.convertirBase64(this.miPortfolios.foto_portada);
      

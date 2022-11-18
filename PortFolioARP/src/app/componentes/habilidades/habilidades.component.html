@@ -1,0 +1,55 @@
+
+<div class="card mat-card">
+    <div>
+        <div class="card-titles">
+
+            <h2>hard and soft skills</h2>
+            <div class="btn-edit" *ngIf="isLogged">
+                  
+                <a  (click)=" openModalNuevo()" class="btn-rigth">
+                    <fa-icon [icon]="faPlus"></fa-icon> 
+                </a>
+                 <!--<button type="button" class="btn btn-dark"  (click)=" openModalNuevo()"><fa-icon [icon]="faPlus"></fa-icon></button>-->
+            </div>
+
+        </div>
+    </div>
+    <div >
+        <div class="row">
+            <div class="col-md-4 col-sm-6" *ngFor="let habilidad of habilidades">
+                <div class="progress-title">
+                    <span>{{habilidad.nombre}}</span>
+                    <span>
+                        <a style="margin:4px"  routerLink="/editar-habilidad/{{habilidad.id}}" class="btn-rigth">
+                            <fa-icon [icon]="faPen"  size="sm"></fa-icon>
+                        </a>                       
+                    </span>
+                    <span>
+                        <a style="margin:4px" (click)="borrar(habilidad.id)" class="btn-rigth">
+                            <fa-icon [icon]="faTrash" size="sm"></fa-icon>
+                        </a>                     
+                    </span>
+    
+                    <div class="progress">
+                        <span class="progress-left">
+                            <span class="progress-bar" id="left" [style.-webkit-transform]="loadSkillIzquierdo(habilidad.porcentaje)"
+                                [style..transform]="loadSkillIzquierdo(habilidad.porcentaje)"></span>
+                        </span>
+                        <span class="progress-right">
+                            <span class="progress-bar" id="rigth" [style.-webkit-transform]="loadSkillDerecho(habilidad.porcentaje)"
+                                [style..transform]="loadSkillDerecho(habilidad.porcentaje)"></span>
+                        </span>
+                        <div class="progress-value" id="value">{{habilidad.porcentaje}}%</div>
+                    </div>
+                </div>
+    
+            </div>
+    
+    
+        </div>
+    </div>
+   
+</div>
+
+
+

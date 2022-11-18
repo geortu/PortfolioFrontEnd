@@ -36,9 +36,7 @@
             <label for="fecha_inicio" class="form-label">Fecha Inicio</label>
             <input type="date" (change)="onChangeValueFecha()" formControlName="fecha_inicio" class="form-control"  
             [ngClass]="{'is-invalid':FechaInicio?.errors && FechaInicio?.touched,'is-valid':!FechaInicio?.errors && FechaInicio?.touched}"  >
-            <div>
-                <span>{{editar.get('fecha_inicio')?.errors | json}}</span>
-               </div>
+            
                 <div *ngIf="FechaInicio?.errors && FechaInicio?.touched"> 
                     
                     <!--  <span>{{editar.get('fecha_fin')?.errors | json}}</span>-->
@@ -54,9 +52,7 @@
             <label for="fecha_fin" class="form-label">Fecha Fin</label>
             <input type="date" [min]="fecha"  (change)="onChangeValueFechaFin()"  formControlName="fecha_fin" class="form-control"  
             [ngClass]="{'is-invalid':FechaFin?.errors && FechaFin?.touched,'is-valid':!FechaFin?.errors && FechaFin?.touched}">
-               <div>
-                <span>{{editar.get('fecha_fin')?.errors | json}}</span>
-               </div>
+               
                 <div *ngIf="FechaFin?.errors && FechaFin?.touched"> 
                     <!--  <span>{{editar.get('fecha_fin')?.errors | json}}</span>-->
                           <p *ngIf="FechaFin?.hasError('required')" class="text-danger">
@@ -82,6 +78,9 @@
             <button type="submit" class="btn btn-primary" [disabled]="!editar.valid">
                Actualizar
             </button>
+            <button style="margin-left:10px" type="reset" class="btn btn-danger" (click)="cancelar()">
+                Cancelar
+             </button>
         </div> 
     
     </form>

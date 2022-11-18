@@ -7,17 +7,17 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item" *ngIf="isLogged">
+              <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="https://www.facebook.com/jorge.biazzo"><fa-icon [icon]="faFacebook"></fa-icon></a>
               </li>
-              <li class="nav-item" *ngIf="isLogged">
+              <li class="nav-item" >
                 <a class="nav-link" href="https://www.instagram.com/biazzojorge"><fa-icon [icon]="faInstagram"></fa-icon></a>
               </li>
               <li class="nav-item"  *ngIf="!isLogged"> 
-                <a class="nav-link" routerLink="/iniciar-sesion" ><fa-icon [icon]="faRight"></fa-icon></a>
+                <a class="nav-link active" routerLink="/iniciar-sesion" ><fa-icon [icon]="faRight"></fa-icon></a>
               </li>       
               <li class="nav-item" *ngIf="isLogged" > 
-                <a class="nav-link" routerLink="/iniciar-sesion"><fa-icon [icon]="faPersonWalkingArrowRight" (click)="onLOgout()"></fa-icon></a>
+                <a class="nav-link" routerLink="/"><fa-icon [icon]="faPersonWalkingArrowRight" (click)="onLOgout()"></fa-icon></a>
               </li>              
                 
               

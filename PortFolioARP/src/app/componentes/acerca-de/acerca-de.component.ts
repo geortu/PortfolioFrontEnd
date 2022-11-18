@@ -20,6 +20,7 @@ export class AcercaDeComponent implements OnInit {
    sobre_mi:string=""
    id:any;
    formData:FormData;
+   isLogged=false;
 
   constructor(private portfolioService:PortfolioService,
     private tokenServicio:TokenService,
@@ -37,6 +38,7 @@ export class AcercaDeComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.isLogged=this.tokenServicio.getToken()==null? false:true;
           // let user=this.tokenServicio.getUserName(); 
           /* const user = this.activatedRoute.snapshot.params['user'];     
             this.portfolioService.obtenerPersona(user).subscribe(data=>{

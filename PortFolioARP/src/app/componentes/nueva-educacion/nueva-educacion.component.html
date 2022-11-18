@@ -1,1 +1,108 @@
-<p>nueva-educacion works!</p>
+<app-barra></app-barra>
+<div class="container d-flex justify-content-center ">
+
+
+
+    <form [formGroup]="editar" class="row g-3"  (ngSubmit)="onUpdate()" novalidate >
+       
+            <div class="col-md-12">
+                <label for="establecimiento" class="form-label">Establecimiento</label>
+            
+                <input type="text" formControlName="establecimiento" class="form-control" 
+                    [ngClass]="{'is-invalid':Establecimiento?.errors && Establecimiento?.touched,'is-valid':!Establecimiento?.errors && Establecimiento?.touched}">
+            
+            
+                <div *ngIf="Establecimiento?.errors && Establecimiento?.touched" class="mb-3">
+                    <span *ngIf="Establecimiento?.hasError('required')" class="text-danger">
+                        El establecimiento es requerido
+                    </span>
+                </div>
+            </div>
+       
+       
+            <div class="col-md-5">
+                <label for="titulo" class="form-label">Titulo</label>
+                <input type="text" formControlName="titulo" class="form-control"                     
+                    [ngClass]="{'is-invalid':Titulo?.errors && Titulo?.touched,'is-valid':!Titulo?.errors && Titulo?.touched}">
+            
+                <div *ngIf="Titulo?.errors && Titulo?.touched" class="mb-3">
+                    <span *ngIf="Titulo?.hasError('required')" class="text-danger">
+                        El Titulo es requerido
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <label for="carrera" class="form-label">Carrera</label>
+                <input type="text" formControlName="carrera" class="form-control"                     
+                    [ngClass]="{'is-invalid':Carrera?.errors && Carrera?.touched,'is-valid':!Carrera?.errors && Carrera?.touched}">
+            
+                <div *ngIf="Carrera?.errors && Carrera?.touched" class="mb-3">
+                    <span *ngIf="Carrera?.hasError('required')" class="text-danger">
+                        La Carrera es requerido
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <label for="puntaje" class="form-label">Puntaje</label>
+                <input type="text" formControlName="puntaje" class="form-control" step="0,01" min="0" max="10"                     
+                    [ngClass]="{'is-invalid':Puntaje?.errors && Puntaje?.touched,'is-valid':!Puntaje?.errors && Puntaje?.touched}">
+            
+                <div *ngIf="Puntaje?.errors && Puntaje?.touched" class="mb-3">
+                    <span *ngIf="Puntaje?.hasError('required')" class="text-danger">
+                        El Puntaje es requerido
+                    </span>
+                </div>
+            </div>
+        
+        <div class="col-md-6">
+            <label for="inicio" class="form-label">Fecha Inicio</label>
+            <input type="date" (change)="onChangeValueFecha()" formControlName="inicio" class="form-control"  
+            [ngClass]="{'is-invalid':Inicio?.errors && Inicio?.touched,'is-valid':!Inicio?.errors && Inicio?.touched}"  >
+           
+                <div *ngIf="Inicio?.errors && Inicio?.touched"> 
+                    
+                    <!--  <span>{{editar.get('fecha_fin')?.errors | json}}</span>-->
+                          <p *ngIf="Inicio?.hasError('required')" class="text-danger">
+                        La fecha de Inicio es requeria 
+                          </p>    
+                    <p *ngIf="Inicio?.errors?.['validarFecha']" class="text-danger">
+                        La Fecha de fin no puede ser menor a la fecha de inicio
+                    </p>      
+                </div>
+        </div>
+        <div class="col-md-6">
+            <label for="fin" class="form-label">Fecha Fin</label>
+            <input type="date" [min]="fecha"  (change)="onChangeValueFechaFin()"  formControlName="fin" class="form-control"  
+            [ngClass]="{'is-invalid':Fin?.errors && Fin?.touched,'is-valid':!Fin?.errors && Fin?.touched}">
+               
+                <div *ngIf="Fin?.errors && Fin?.touched"> 
+                    <!--  <span>{{editar.get('fecha_fin')?.errors | json}}</span>-->
+                          <p *ngIf="Fin?.hasError('required')" class="text-danger">
+                        La fecha de fin es requeria 
+                          </p>    
+                    <p *ngIf="Fin?.errors?.['validarFechaFin']" class="text-danger">
+                        La Fecha de fin no puede ser menor a la fecha de inicio
+                    </p>      
+                </div>
+        </div>
+        <div class="col-md-12">
+            <label for="logo" class="form-label">Logo Establecimiento</label>
+            <input  formControlName="logo"  (change)="onFileChangedFotoLogo($event)" class="form-control" 
+            type="file" accept=".jpeg,.jpg,.png" class="form-control"  >
+        </div>
+        
+        
+        <div class="col-md-5">
+            <button type="submit" class="btn btn-primary" [disabled]="!editar.valid">
+               Guardar
+            </button>
+            <button style="margin-left:10px" type="reset" class="btn btn-danger" (click)="cancelar()">
+                Cancelar
+             </button>
+        </div> 
+    
+    </form>
+    
+   
+    
+</div>

@@ -21,6 +21,7 @@ export class NuevaExperienciaComponent implements OnInit {
   isFechaInicio:boolean=false;
   fechaInicio:string="";
   fechaFin:string="";
+  path="experiencia";
   
 
   constructor( private date:DatePipe,private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router  ) {
@@ -44,7 +45,7 @@ export class NuevaExperienciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.id=this.activatedRoute.snapshot.params['id'];
-    this.user=this.tokenService.getUserName();   
+    //this.user=this.tokenService.getUserName();   
     if (new Date(this.FechaInicio?.value).toString()=="Invalid Date"){
       this.editar.controls['fecha_fin'].disable();
     }
@@ -56,7 +57,7 @@ export class NuevaExperienciaComponent implements OnInit {
     
   }
   get Puesto(){
-    return this.editar.get('puesto')
+    return this.editar.get('puesto');
   }
   get FechaInicio(){
     return this.editar.get('fecha_inicio');
@@ -68,6 +69,7 @@ export class NuevaExperienciaComponent implements OnInit {
   public onFileChangedFotoLogo(event:any) {
     //Select File
     this.selectedFotologo = event.target.files[0];
+   
         
   }
   onUpdate(): void {
@@ -78,17 +80,18 @@ export class NuevaExperienciaComponent implements OnInit {
     formData.append('puesto',this.editar.get('puesto')?.value);
     formData.append('fecha_inicio',this.editar.get('fecha_inicio')?.value);
     formData.append('fecha_fin',this.editar.get('fecha_fin')?.value);
-    formData.append('logo',this.selectedFotologo);
+    formData.append('logo',this.selectedFotologo != undefined? this.selectedFotologo: this.editar.get('logo')?.value);
     formData.append('descripcion',this.editar.get('descripcion')?.value);
     formData.append('id_persona',this.id);
     
      
     
-   this.portFolioService.crearExperiencia(formData).subscribe();
+   this.portFolioService.crear(formData,this.path).subscribe();
+   
      
    
-   //this.ruta.navigate(['/portfolio']);
-   this.ruta.navigate(['/'+`portfolio/${this.user}`]);
+   this.ruta.navigate(['/portfolio']);
+   //this.ruta.navigate(['/'+`portfolio/${this.user}`]);
 
    }
    onChangeValueFecha(){
@@ -100,9 +103,10 @@ export class NuevaExperienciaComponent implements OnInit {
       this.fecha=this.date.transform(f,'yyyy-MM-dd');
       this.editar.controls['fecha_fin'].enable();
     }
+   
 
    
-    console.log(new Date(this.fechaInicio));
+   
    
    
    }
@@ -146,6 +150,11 @@ validarFechaInicio():ValidatorFn {
      
       
   }
+}
+cancelar(){
+  this.editar.reset(); 
+  this.ruta.navigate(['/portfolio']);
+
 }
 }
    

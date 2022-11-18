@@ -19,6 +19,8 @@ export class ExperiencialaboralComponent implements OnInit {
   response: any;
   user:string="";
   id_persona:any;
+  isLogged=false;
+  path="experiencia"
 
 
   constructor(private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolio:PortfolioService) { 
@@ -26,15 +28,17 @@ export class ExperiencialaboralComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.user = this.activatedRoute.snapshot.params['user'];
-   //this.portFolio.obtenerExperienciasByUser(this.user).subscribe((data)=>{
+     this.isLogged=this.tokenService.getToken()==null? false:true;
+      //this.user = this.activatedRoute.snapshot.params['user'];
+      //this.portFolio.obtenerExperienciasByUser(this.user).subscribe((data)=>{
       this.portFolio.obtenerDatos().subscribe((data)=>{
       this.id_persona=data[0].id;
-      this.response = data[0].experienciasLaborales; 
-      console.log(this.response);     
+      this.response = data[0].experienciasLaborales;   
+      
       this.response.forEach((element: {
         id: any; nombre_empresa: any; puesto: any; fecha_inicio: string; fecha_fin: string; descripcion: any; logo: File; 
 }) => {
+  
         this.experiencias.push({
         id:element.id,
         nombre_empresa:element.nombre_empresa,
@@ -43,6 +47,7 @@ export class ExperiencialaboralComponent implements OnInit {
         fecha_fin:new Date(this.portFolio.obtenerFecha(element.fecha_fin).toString()).getFullYear(),
         descripcion:element.descripcion,
         logo:this.portFolio.convertirBase64(element.logo)
+        
        // id_persona:element.persona.id
         
           });
@@ -50,13 +55,15 @@ export class ExperiencialaboralComponent implements OnInit {
        
     });
     
+   //Pedndiente el ordenamiento  
+    
   }
   borrarExperiencia(id:number){
     const found = this.experiencias.findIndex(element => element.id==id);
     
     this.experiencias.splice(found,1);
       
-    this.portFolio.borrarExperiencia(id).subscribe();
+    this.portFolio.borrar(id,this.path).subscribe();
    
    
     

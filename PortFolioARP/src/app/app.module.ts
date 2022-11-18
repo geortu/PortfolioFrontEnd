@@ -23,6 +23,10 @@ import { NuevaExperienciaComponent } from './componentes/nueva-experiencia/nueva
 import { NuevaEducacionComponent } from './componentes/nueva-educacion/nueva-educacion.component';
 import { EditarEducacionComponent } from './componentes/editar-educacion/editar-educacion.component';
 import { DatePipe } from '@angular/common';
+import { HabilidadesComponent } from './componentes/habilidades/habilidades.component';
+import { NuevaHabilidadComponent } from './componentes/nueva-habilidad/nueva-habilidad.component';
+import { EditarHabilidadComponent } from './componentes/editar-habilidad/editar-habilidad.component';
+import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -33,9 +37,10 @@ import { DatePipe } from '@angular/common';
     AcercaDeComponent,
     IniciarSesionComponent,
     PortfolioComponent,  
-    RegistroComponent, EditarPersonaComponent, ExperiencialaboralComponent, EducacionComponent, EditarExpereincialaboralComponent, NuevaExperienciaComponent, NuevaEducacionComponent, EditarEducacionComponent
+    RegistroComponent, EditarPersonaComponent, ExperiencialaboralComponent, EducacionComponent, EditarExpereincialaboralComponent, NuevaExperienciaComponent, NuevaEducacionComponent, EditarEducacionComponent, HabilidadesComponent, NuevaHabilidadComponent, EditarHabilidadComponent
   ],
   imports: [
+    ModalModule.forRoot(),    
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -44,7 +49,7 @@ import { DatePipe } from '@angular/common';
    // FormsModule
   ],
   providers: [PortfolioService, 
-            {provide: HTTP_INTERCEPTORS,useClass:InterceptorService, multi:true },DatePipe ],
+            {provide: HTTP_INTERCEPTORS,useClass:InterceptorService, multi:true },DatePipe,BsModalService ],
             
   bootstrap: [AppComponent]
 })

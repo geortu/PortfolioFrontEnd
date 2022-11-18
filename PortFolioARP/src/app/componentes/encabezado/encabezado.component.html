@@ -6,7 +6,7 @@
     <div id="info">
         <div id="info-img">
             <img class="profile-image" [src]="foto_perfil" alt="">
-            <div class="btn-edit"><a routerLink="/editar-persona/{{miPortfolios.id}}" class="btn-rigth">
+            <div class="btn-edit" *ngIf="isLogged"><a routerLink="/editar-persona/{{miPortfolios.id}}" class="btn-rigth">
                     <fa-icon [icon]="faPen"></fa-icon>
                 </a>
             </div>

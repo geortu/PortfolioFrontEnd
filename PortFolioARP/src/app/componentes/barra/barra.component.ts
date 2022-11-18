@@ -26,6 +26,8 @@ export class BarraComponent implements OnInit {
   }
   onLOgout():void{
     this.tokenService.logOut();
+    this.isLogged=false;
+    
    
   }
 

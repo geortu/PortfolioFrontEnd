@@ -3,8 +3,8 @@
         <div class="card-titles">
 
             <h2>Experinecias</h2>
-            <div class="btn-edit">
-                <a routerLink="/nueva-experiencia/{{id_persona?}}" class="btn-rigth">
+            <div class="btn-edit" *ngIf="isLogged">
+                <a routerLink="/nueva-experiencia/{{id_persona}}" class="btn-rigth">
                     <fa-icon [icon]="faPlus"></fa-icon>
                 </a>
             </div>
@@ -29,7 +29,7 @@
 
                     </a>
                 </div>
-                <div class="data-control">
+                <div class="data-control" *ngIf="isLogged">
                     <div class="btn-edit">
                         <a routerLink="/editar-expereincialaboral/{{experiencia.id}}" class="btn-rigth">
                             <fa-icon [icon]="faPen"></fa-icon>
