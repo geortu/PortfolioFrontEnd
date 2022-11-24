@@ -1,57 +1,60 @@
 
-   
 
     
-    <div class="modal-header">
+
+    <div class="modal-header" >
         <h4 class="modal-title pull-left">Nueva Habilidad</h4>
         <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
             <span aria-hidden="true" class="visually-hidden">&times;</span>
         </button>
     </div>
-    
+
     <div class="modal-body">
         <form [formGroup]="editar" class="row g-3" (ngSubmit)="onUpdate()" novalidate>
-    
-    
+
+
             <div class="col-md-8">
                 <label for="nombre" class="form-label">Nombre</label>
-    
+
                 <input type="text" formControlName="nombre" class="form-control"
                     [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched,'is-valid':!Nombre?.errors && Nombre?.touched}">
-    
-    
+
+
                 <div *ngIf="Nombre?.errors && Nombre?.touched" class="mb-3">
                     <span *ngIf="Nombre?.hasError('required')" class="text-danger">
                         El Nombre es requerido
                     </span>
                 </div>
             </div>
-    
-    
-    
-    
+
+
+
+
             <div class="col-md-4">
                 <label for="porcentaje" class="form-label">Porcentaje</label>
                 <input type="number" formControlName="porcentaje" class="form-control" step="0,01" min="0" max="100"
                     [ngClass]="{'is-invalid':Porcentaje?.errors && Porcentaje?.touched,'is-valid':!Porcentaje?.errors && Porcentaje?.touched}">
-    
+
                 <div *ngIf="Porcentaje?.errors && Porcentaje?.touched" class="mb-3">
                     <span *ngIf="Porcentaje?.hasError('required')" class="text-danger">
                         El Porcentaje es requerido
                     </span>
                 </div>
             </div>
-    
-    
-    
+
+
+
             <div class="col-md-5">
-                <button type="submit" class="btn btn-primary" [disabled]="!editar.valid"> Guardar </button>
-    
+                <!-- <button type="submit" class="btn btn-dark" (click)="onUpdate()" [disabled]="!editar.valid"  data-bs-dismiss="modal"> Guardar </button>-->
+
             </div>
         </form>
-    
-    
-    
-    </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-dark" (click)="onUpdate()" [disabled]="!editar.valid"  data-bs-dismiss="modal"> Guardar </button>
+           
+          </div>
+
+
+  
 
 

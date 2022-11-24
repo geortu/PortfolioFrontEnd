@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 
 import { throwError,catchError, map, Observable,of, Subscriber } from 'rxjs';
+
 import { PersonaDto } from '../model/persona-dto';
 
 
@@ -51,6 +52,7 @@ export class PortfolioService {
   borrar(id:number,path:string){
     return this.http.delete(this.url + `${path}/borrar/${id}`);
   }
+ 
 
   obtenerFecha(fecha:string):string{
     var nuevaFecha:string=""

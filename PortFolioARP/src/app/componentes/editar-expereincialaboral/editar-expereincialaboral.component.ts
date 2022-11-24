@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder,FormGroup,ValidationErrors,ValidatorFn,Validators  } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { PortfolioService } from 'src/app/servicio/portfolio.service';
 import { TokenService } from 'src/app/servicio/token.service';
 
@@ -21,8 +22,10 @@ export class EditarExpereincialaboralComponent implements OnInit {
   fechaInicio:string="";
   fechaFin:string="";
   path="experiencia";
+  experiencias:any[]=[];
+  public event: EventEmitter<any> = new EventEmitter(); 
 
-  constructor(private date:DatePipe,private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router  ) {
+  constructor(public bsModalRef: BsModalRef, private date:DatePipe,private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router  ) {
     this.editar=this.FormBuilder.group(
       {
         
@@ -41,21 +44,21 @@ export class EditarExpereincialaboralComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.id=this.activatedRoute.snapshot.params['id'];
-    this.portFolioService.obtenerById(this.id,this.path).subscribe(data =>{
+    //this.id=this.activatedRoute.snapshot.params['id'];
+    //this.portFolioService.obtenerById(this.id,this.path).subscribe(data =>{
       
-      //this.user=data.persona.email;
-      this.editar.controls['nombre_empresa'].setValue(data.nombre_empresa);
-      this.editar.controls['puesto'].setValue(data.puesto);
-      this.editar.controls['fecha_inicio'].setValue(this.portFolioService.obtenerFecha(data.fecha_inicio));
-      this.editar.controls['fecha_fin'].setValue(this.portFolioService.obtenerFecha(data.fecha_fin));
-      this.editar.controls['descripcion'].setValue(data.descripcion);  
-      this.fechaInicio= this.portFolioService.obtenerFecha(data.fecha_inicio);
-      this.fechaFin=this.portFolioService.obtenerFecha(data.fecha_fin);
+      //this.user=data.persona.email;});
+      this.editar.controls['nombre_empresa'].setValue(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="nombre_empresa")].value);
+      this.editar.controls['puesto'].setValue(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="puesto")].value);
+      this.editar.controls['fecha_inicio'].setValue(this.portFolioService.obtenerFecha(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="fecha_inicio")].value));
+      this.editar.controls['fecha_fin'].setValue(this.portFolioService.obtenerFecha(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="fecha_fin")].value));
+      this.editar.controls['descripcion'].setValue(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="descripcion")].value);  
+      this.fechaInicio= this.portFolioService.obtenerFecha(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="fecha_inicio")].value);
+      this.fechaFin=this.portFolioService.obtenerFecha(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="fecha_fin")].value);
      
 
 
-    });
+    
 
 
 
@@ -126,10 +129,16 @@ onUpdate(): void {
   
    
   
- this.portFolioService.actualizar(this.id,formData,this.path).subscribe();
-   
+ //this.portFolioService.actualizar(this.id,formData,this.path).subscribe();
+ this.portFolioService.actualizar(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="id")].value,formData,this.path).subscribe(data=>{
+  this.event.emit({ id:data.id, nombre_empresa:data.nombre_empresa,puesto:data.puesto,
+    fecha_inicio:data.fecha_inicio,fecha_fin:data.fecha_fin, descripcion:data.descripcion,logo:data.logo}); 
  
- this.ruta.navigate(['/portfolio']);
+
+ });  
+ this.bsModalRef.hide(); 
+ 
+ //this.ruta.navigate(['/portfolio']);
  //this.ruta.navigate(['/'+`portfolio/${this.user}`]);
 
  }

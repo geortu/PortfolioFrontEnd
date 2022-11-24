@@ -2,67 +2,54 @@
 <app-barra></app-barra>
 
 
-<div class="card mat-card text-center " id="first-card" > 
 
-  <div class="container d-flex justify-content-center ">
 
-    <div class="card">
-      <div class="car-header">
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/iniciar-sesion">Iniciar Sesion</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/registro">Crear Persona</a>
-          </li>
-
-        </ul>
-
-      </div>
-
-      <div class="car-body">
-       
-        <form [formGroup]="form"  (ngSubmit)="onLogin()" novalidate>
-          <div class="form-group mb-3">
-            <div>
-              <label for="exampleInputEmail1" class="form-label">Email</label>
-              <input type="email" formControlName="nombreUsuario" class="form-control" id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                [ngClass]="{'is-invalid':NombreUsuario?.errors && NombreUsuario?.touched,'is-valid':!NombreUsuario?.errors && NombreUsuario?.touched}">
-            </div>
-            <div *ngIf="NombreUsuario?.errors && NombreUsuario?.touched" class="mb-3">
-              <p *ngIf="NombreUsuario?.hasError('required')" class="text-danger">
-                El nombre de Usuario es requerido
-              </p>
-              <p *ngIf="NombreUsuario?.hasError('email')" class="text-danger">
-                El nombre de Usuario no es valido
-              </p>
-            </div>
+  <div class="container d-flex justify-content-center "> 
+  
+    
+  
+      <form [formGroup]="form" (ngSubmit)="onLogin()" novalidate>
+        <div class="form-group mb-3">
+          <div>
+            <label for="" class="form-label"><fa-icon [icon]="faUser"></fa-icon> Email </label>
+            <input type="email" formControlName="nombreUsuario" class="form-control" id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              [ngClass]="{'is-invalid':NombreUsuario?.errors && NombreUsuario?.touched,'is-valid':!NombreUsuario?.errors && NombreUsuario?.touched}">
           </div>
-          <div class="form-group mb-3">
-            <div >
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1"
-                [ngClass]="{'is-invalid':Password?.errors && Password?.touched,'is-valid':!Password?.errors && Password?.touched}">
-            </div>
-            <div *ngIf="Password?.errors && Password?.touched" class="mb-3">
-              <p *ngIf="Password?.hasError('required')" class="text-danger">
-                La contraseña es requerido
-              </p>
-              <p *ngIf="Password?.errors?.['minlength']" class="text-danger">
-                Minimo 8 caracteres
-              </p>
-            </div>
+          <div *ngIf="NombreUsuario?.errors && NombreUsuario?.touched" class="mb-3">
+            <p *ngIf="NombreUsuario?.hasError('required')" class="text-danger">
+              El nombre de Usuario es requerido
+            </p>
+            <p *ngIf="NombreUsuario?.hasError('email')" class="text-danger">
+              El nombre de Usuario no es valido
+            </p>
           </div>
-          <div class="form-group mb-3">
-            <button type="submit" class="btn btn-outline-success  btn-block w-100" [disabled]="form.invalid">
-              <fa-icon [icon]="Icon"></fa-icon> Iniciar Sesion
-            </button>
+        </div>
+        <div class="form-group mb-3">
+          <div>
+            <label for="" class="form-label"><fa-icon [icon]="faLock"> </fa-icon> Password </label>                     
+            <input type="password" formControlName="password" class="form-control" id="exampleInputPassword1"
+              [ngClass]="{'is-invalid':Password?.errors && Password?.touched,'is-valid':!Password?.errors && Password?.touched}">
+               
+            
           </div>
-        </form>
-        <div class="form-group" *ngIf="isLoginFail" class="alert alert-danger mb-3" >{{errMsj}}</div>
-      </div>
-    </div>
+          <div *ngIf="Password?.errors && Password?.touched" class="mb-3">
+            <p *ngIf="Password?.hasError('required')" class="text-danger">
+              La contraseña es requerido
+            </p>
+            <p *ngIf="Password?.errors?.['minlength']" class="text-danger">
+              Minimo 8 caracteres
+            </p>
+          </div>
+        </div>
+        <div class="form-group mb-3">
+          <button type="submit" class="btn btn-outline-success  btn-block w-100" [disabled]="form.invalid">
+            <fa-icon [icon]="Icon"></fa-icon> Iniciar Sesion
+          </button>
+        </div>
+      </form>
+      <div class="form-group" *ngIf="isLoginFail" class="alert alert-danger mb-3">{{errMsj}}</div>
+    
   </div>
-</div>
-
+     
+ 

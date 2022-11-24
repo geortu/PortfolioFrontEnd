@@ -1,7 +1,11 @@
-<app-barra></app-barra>
-<div class="container d-flex justify-content-center ">
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Editar Educacion</h4>
+    <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
 
-
+<div class="modal-body">
 
     <form [formGroup]="editar" class="row g-3"  (ngSubmit)="onUpdate()" novalidate >
        
@@ -44,7 +48,7 @@
             </div>
             <div class="col-md-2">
                 <label for="puntaje" class="form-label">Puntaje</label>
-                <input type="text" formControlName="puntaje" class="form-control" step="0,01" min="0" max="10"                     
+                <input type="number" formControlName="puntaje" class="form-control" step="0,01" min="0" max="10"                     
                     [ngClass]="{'is-invalid':Puntaje?.errors && Puntaje?.touched,'is-valid':!Puntaje?.errors && Puntaje?.touched}">
             
                 <div *ngIf="Puntaje?.errors && Puntaje?.touched" class="mb-3">
@@ -92,18 +96,23 @@
         </div>
         
         
-        <div class="col-md-5">
+       <!--  <div class="col-md-5">
             <button type="submit" class="btn btn-primary" [disabled]="!editar.valid">
                Actualizar
             </button>
             <button style="margin-left:10px" type="reset" class="btn btn-danger" (click)="cancelar()">
                 Cancelar
              </button>
-        </div> 
+        </div> -->
     
     </form>
+</div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-dark" (click)="onUpdate()" [disabled]="!editar.valid"  data-bs-dismiss="modal"> Actualizar </button>
+       
+      </div> 
     
    
     
-</div>
+
 

@@ -4,9 +4,13 @@
 
             <h2>Educacion</h2>
             <div class="btn-edit" *ngIf="isLogged">
-                <a routerLink="/nueva-educacion/{{id_persona}}" class="btn-rigth">
+                <div class="btn-edit" *ngIf="isLogged">
+                    <a  (click)=" openModalNuevo()" class="btn-rigth">
+                        <fa-icon [icon]="faPlus"></fa-icon> 
+                    </a>
+              <!--   <a routerLink="/nueva-educacion/{{id_persona}}" class="btn-rigth">
                     <fa-icon [icon]="faPlus"></fa-icon>
-                </a>
+                </a>-->
             </div>
 
         </div>
@@ -31,9 +35,12 @@
                 </div>
                 <div class="data-control" *ngIf="isLogged">
                     <div class="btn-edit">
-                        <a routerLink="/editar-educacion/{{educacion.id}}" class="btn-rigth">
+                        <a style="margin:4px"  (click)= openModalEditar(educacion.id) class="btn-rigth" *ngIf="isLogged">
+                            <fa-icon [icon]="faPen" size="sm"  ></fa-icon>
+                        </a>  
+                       <!-- <a routerLink="/editar-educacion/{{educacion.id}}" class="btn-rigth">
                             <fa-icon [icon]="faPen"></fa-icon>
-                        </a>                       
+                        </a>    -->                    
                     </div>
                     <div>
                         <a (click)="borrarEducacion(educacion.id)" class="btn-rigth">

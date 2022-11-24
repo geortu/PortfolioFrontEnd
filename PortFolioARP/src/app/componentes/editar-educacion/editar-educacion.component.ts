@@ -1,7 +1,8 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder,FormGroup,ValidationErrors,ValidatorFn,Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { PortfolioService } from 'src/app/servicio/portfolio.service';
 import { TokenService } from 'src/app/servicio/token.service';
 
@@ -20,8 +21,10 @@ export class EditarEducacionComponent implements OnInit {
   fechaInicio:string="";
   fechaFin:string="";
   path="educacion";
+  educaciones:any[]=[];
+  public event: EventEmitter<any> = new EventEmitter(); 
 
-  constructor(private date:DatePipe,private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router ) {
+  constructor(public bsModalRef: BsModalRef,private date:DatePipe,private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router ) {
     this.editar=this.FormBuilder.group(
       {
         
@@ -44,23 +47,23 @@ export class EditarEducacionComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.id=this.activatedRoute.snapshot.params['id'];
-    this.portFolioService.obtenerById(this.id,this.path).subscribe(data =>{
+    //this.id=this.activatedRoute.snapshot.params['id'];
+   // this.portFolioService.obtenerById(this.id,this.path).subscribe(data =>{
       
-      //this.user=data.persona.email;
-      this.editar.controls['establecimiento'].setValue(data.establecimiento);
-      this.editar.controls['titulo'].setValue(data.titulo);
-      this.editar.controls['inicio'].setValue(this.portFolioService.obtenerFecha(data.inicio));
-      this.editar.controls['fin'].setValue(this.portFolioService.obtenerFecha(data.fin));
-      this.editar.controls['carrera'].setValue(data.carrera); 
-      this.editar.controls['puntaje'].setValue(data.puntaje);  
-      this.fechaInicio= this.portFolioService.obtenerFecha(data.inicio);
-      this.fechaFin=this.portFolioService.obtenerFecha(data.fin);
+      //this.user=data.persona.email; });
+
+      this.editar.controls['establecimiento'].setValue(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="establecimiento")].value);
+      this.editar.controls['titulo'].setValue(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="titulo")].value);
+      this.editar.controls['inicio'].setValue(this.portFolioService.obtenerFecha(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="inicio")].value));
+      this.editar.controls['fin'].setValue(this.portFolioService.obtenerFecha(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="fin")].value));
+      this.editar.controls['carrera'].setValue(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="carrera")].value); 
+      this.editar.controls['puntaje'].setValue(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="puntaje")].valuee);  
+      this.fechaInicio= this.portFolioService.obtenerFecha(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="inicio")].value);
+      this.fechaFin=this.portFolioService.obtenerFecha(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="fin")].value);
      
 
 
-    });
-
+   
 
 
   }
@@ -79,11 +82,17 @@ export class EditarEducacionComponent implements OnInit {
     
      
     
-   this.portFolioService.actualizar(this.id,formData,this.path).subscribe();
+  // this.portFolioService.actualizar(this.id,formData,this.path).subscribe();
+   this.portFolioService.actualizar(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="id")].value,formData,this.path).subscribe(data=>{
+    this.event.emit({ id:data.id, establecimiento:data.establecimiento,titulo:data.titulo,
+      carrera:data.carrera,puntaje:data.puntaje, inicio:data.inicio,fin:data.fin,logo:data.logo}); 
    
+
+   });
+   this.bsModalRef.hide();  
      
    
-   this.ruta.navigate(['/portfolio']);
+   //this.ruta.navigate(['/portfolio']);
    //this.ruta.navigate(['/'+`portfolio/${this.user}`]);
 
    }

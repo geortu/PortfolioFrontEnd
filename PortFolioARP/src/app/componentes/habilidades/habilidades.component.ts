@@ -5,6 +5,8 @@ import { TokenService } from 'src/app/servicio/token.service';
 import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { NuevaHabilidadComponent } from '../nueva-habilidad/nueva-habilidad.component';
+import { EditarHabilidadComponent } from '../editar-habilidad/editar-habilidad.component';
+
 
 
 @Component({
@@ -27,11 +29,10 @@ export class HabilidadesComponent implements OnInit {
   rotateLeft:string="";
   rotateRight:string="";
   response: any;
-  path="skill"
- 
-   bsModalRef?: BsModalRef; 
-   fileAttacherContainer: any;
-   resolver: any;
+  path="skill";
+  bsModalRef?: BsModalRef;
+  skill:any; 
+   
  
 
   constructor(private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolio:PortfolioService,
@@ -56,7 +57,8 @@ export class HabilidadesComponent implements OnInit {
       this.habilidades=new Array<any>();
       this.portFolio.obtenerDatos().subscribe((data)=>{
       this.id_persona=data[0].id;
-      this.response = data[0].skilles;   
+      this.response = data[0].skilles;  
+      //this.habilidades = data[0].skilles; 
       
       this.response.forEach((element: {
         id: any; nombre: any; porcentaje: any; 
@@ -65,7 +67,9 @@ export class HabilidadesComponent implements OnInit {
         this.habilidades.push({
         id:element.id,
         nombre:element.nombre,
-        porcentaje:element.porcentaje
+        porcentaje:element.porcentaje,
+        
+
        
         
        // id_persona:element.persona.id
@@ -75,6 +79,7 @@ export class HabilidadesComponent implements OnInit {
        });
        
     }); 
+   
 
   }
   
@@ -123,14 +128,18 @@ export class HabilidadesComponent implements OnInit {
 
   
   borrar(id:number){
-    const found = this.habilidades.findIndex(element => element.id==id);
-    
-    this.habilidades.splice(found,1);
+    this.borrarArray(id);
+    console.log(id);
       
     this.portFolio.borrar(id,this.path).subscribe();
    
     
   
+  }
+  borrarArray(id:number){
+    const found = this.habilidades.findIndex(element => element.id==id);    
+    this.habilidades.splice(found,1);
+
   }
   openModalNuevo() {
   
@@ -153,32 +162,40 @@ export class HabilidadesComponent implements OnInit {
   
     
   }
-  openModalEditar() {
-  
+  openModalEditar(id:number) {
+    this.skill=this.obtenerSkill(id);
+    
     const initialState = {
-      id: [
-        {"tag":'id_persona',"value":this.id_persona}
-      ]
-    };
+          skill: [
+            {"tag":'id_skill',"value":this.skill.id},
+            {"tag":'nombre',"value":this.skill.nombre},
+            {"tag":'porcentaje',"value":this.skill.porcentaje}
+          ]
+        }; 
+     
+  
+    
    
-      this.bsModalRef = this.modalService.show(NuevaHabilidadComponent,{initialState ,class: 'modal-lg'} );
-       this.bsModalRef.content.closeBtnName = 'Close';   
-       this.bsModalRef.content.event.subscribe((res: { bandera: any; })=>{
-        if(res.bandera){
-          this.ObtenerDatos();
-        }
-       });
-       /* this.bsModalRef.content.event.subscribe((res: { nombre: any; porcentaje: any; id_persona: any; }) => {
+   
+      this.bsModalRef = this.modalService.show(EditarHabilidadComponent,{initialState ,class: 'modal-lg'} );
+      this.bsModalRef.content.closeBtnName = 'Close';   
+      
+      
+        this.bsModalRef.content.event.subscribe((res: { nombre: any; porcentaje: any; id: any; }) => {
+          this.borrarArray(res.id);
         this.habilidades.push({
-          
+          id:res.id,
           nombre:res.nombre,
-          porcentaje:res.porcentaje,
+          porcentaje:res.porcentaje
           
         });
-      });*/
+      });
     
     
       
+    }
+    obtenerSkill(id:number){
+      return  this.habilidades.find(element => element.id==id);
     }
  
  

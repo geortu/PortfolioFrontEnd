@@ -1,7 +1,11 @@
-<app-barra></app-barra>
-<div class="container d-flex justify-content-center ">
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Editar Experiencia</h4>
+    <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
 
-
+<div class="modal-body">
 
     <form [formGroup]="editar" class="row g-3"  (ngSubmit)="onUpdate()" novalidate>
        
@@ -74,17 +78,20 @@
             <textarea class="form-control"  formControlName="descripcion" ></textarea>
         </div>
         
-        <div class="col-md-5">
+       <!-- <div class="col-md-5">
             <button type="submit" class="btn btn-primary" [disabled]="!editar.valid">
                Actualizar
             </button>
             <button style="margin-left:10px" type="reset" class="btn btn-danger" (click)="cancelar()">
                 Cancelar
              </button>
-        </div> 
+        </div> --> 
     
     </form>
     
    
-    
-</div>
+</div>  
+<div class="modal-footer">
+    <button type="submit" class="btn btn-dark" (click)="onUpdate()" [disabled]="!editar.valid"  data-bs-dismiss="modal"> Actualizar </button>
+   
+  </div> 

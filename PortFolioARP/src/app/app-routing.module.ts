@@ -22,9 +22,7 @@ const routes: Routes = [
   {path:'editar-expereincialaboral/:id',component:EditarExpereincialaboralComponent},
   {path:'editar-educacion/:id',component:EditarEducacionComponent},
   {path:'nueva-educacion/:id',component:NuevaEducacionComponent},
-  {path:'nueva-experiencia/:id',component:NuevaExperienciaComponent},
-  {path:'nueva-habilidad/:id',component:NuevaHabilidadComponent},
-  {path:'editar-habilidad/:id',component:EditarHabilidadComponent},
+  {path:'nueva-experiencia/:id',component:NuevaExperienciaComponent},  
   //{path:'',redirectTo:'iniciar-sesion',pathMatch:'full'}
   {path:'',redirectTo:'portfolio',pathMatch:'full'}
 ];

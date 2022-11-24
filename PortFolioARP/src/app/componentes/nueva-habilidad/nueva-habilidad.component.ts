@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TokenService } from 'src/app/servicio/token.service';
 import { FormGroup,FormBuilder, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-nueva-habilidad',
   templateUrl: './nueva-habilidad.component.html',
@@ -14,6 +15,7 @@ export class NuevaHabilidadComponent implements OnInit {
   editar:FormGroup;
   id: any[] = []; 
   public event: EventEmitter<any> = new EventEmitter();
+ 
   path="skill";
  
 
@@ -49,6 +51,7 @@ export class NuevaHabilidadComponent implements OnInit {
   }
   onUpdate(): void {
    
+    
     const formData=new FormData();
    
     formData.append('nombre',this.editar.get('nombre')?.value);    
@@ -57,11 +60,19 @@ export class NuevaHabilidadComponent implements OnInit {
     
   
     
-   this.portfolio.crear(formData,this.path).subscribe();
-   this.event.emit({ bandera:true  });                  
+   this.portfolio.crear(formData,this.path).subscribe(data=>{
+    this.event.emit({ id:data.id, nombre:data.nombre,porcentaje:data.porcentaje}); 
+   
+
+   });
+    
+    
+   
+                    
                   
      
    this.bsModalRef.hide();  
+   
 
    }
   

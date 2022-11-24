@@ -4,7 +4,8 @@ import { Route, Router } from '@angular/router';
 import { LoginUsuario } from 'src/app/model/login-usuario';
 import { AutenticacionService } from 'src/app/servicio/autenticacion.service';
 import { TokenService } from 'src/app/servicio/token.service';
-import { faRightToBracket } from '@fortawesome/free-solid-svg-icons';
+import { faRightToBracket,faUser,faLock } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -16,6 +17,8 @@ export class IniciarSesionComponent implements OnInit {
   isLogged=false;
   isLoginFail=false;
   Icon=faRightToBracket;
+  faUser=faUser;
+  faLock=faLock;
   
  
   loginUsuario:LoginUsuario | undefined;

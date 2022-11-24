@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PortfolioService } from 'src/app/servicio/portfolio.service';
 import { TokenService } from 'src/app/servicio/token.service';
 import { AbstractControl, FormBuilder,FormGroup,ValidationErrors,ValidatorFn,Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Validaciones } from 'src/app/utils/validaciones';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Validaciones } from 'src/app/utils/validaciones';
 })
 export class NuevaExperienciaComponent implements OnInit {
   editar:FormGroup;
-  id:any;
+ // id:any;
   selectedFotologo!:File ;  
   user:string="";
   fecha:any;
@@ -22,9 +23,12 @@ export class NuevaExperienciaComponent implements OnInit {
   fechaInicio:string="";
   fechaFin:string="";
   path="experiencia";
+  id: any[] = []; 
+  public event: EventEmitter<any> = new EventEmitter(); 
+ 
   
 
-  constructor( private date:DatePipe,private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router  ) {
+  constructor(public bsModalRef: BsModalRef, private date:DatePipe,private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router  ) {
     this.editar=this.FormBuilder.group(
       {
         
@@ -44,7 +48,7 @@ export class NuevaExperienciaComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.id=this.activatedRoute.snapshot.params['id'];
+    //this.id=this.activatedRoute.snapshot.params['id'];
     //this.user=this.tokenService.getUserName();   
     if (new Date(this.FechaInicio?.value).toString()=="Invalid Date"){
       this.editar.controls['fecha_fin'].disable();
@@ -82,15 +86,21 @@ export class NuevaExperienciaComponent implements OnInit {
     formData.append('fecha_fin',this.editar.get('fecha_fin')?.value);
     formData.append('logo',this.selectedFotologo != undefined? this.selectedFotologo: this.editar.get('logo')?.value);
     formData.append('descripcion',this.editar.get('descripcion')?.value);
-    formData.append('id_persona',this.id);
+    formData.append('id_persona',this.id[0].value);
     
      
     
-   this.portFolioService.crear(formData,this.path).subscribe();
+   this.portFolioService.crear(formData,this.path).subscribe(data=>{
+    this.event.emit({ id:data.id, nombre_empresa:data.nombre_empresa,puesto:data.puesto,
+      fecha_inicio:data.fecha_inicio,fecha_fin:data.fecha_fin, descripcion:data.descripcion,logo:data.logo}); 
    
-     
+
+   });
+  
    
-   this.ruta.navigate(['/portfolio']);
+   this.bsModalRef.hide();  
+  
+   //this.ruta.navigate(['/portfolio']);
    //this.ruta.navigate(['/'+`portfolio/${this.user}`]);
 
    }

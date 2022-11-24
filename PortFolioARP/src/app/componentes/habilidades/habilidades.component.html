@@ -20,12 +20,13 @@
                 <div class="progress-title">
                     <span>{{habilidad.nombre}}</span>
                     <span>
-                        <a style="margin:4px"  routerLink="/editar-habilidad/{{habilidad.id}}" class="btn-rigth">
-                            <fa-icon [icon]="faPen"  size="sm"></fa-icon>
-                        </a>                       
+                        <a style="margin:4px"  (click)= openModalEditar(habilidad.id) class="btn-rigth" *ngIf="isLogged">
+                            <fa-icon [icon]="faPen" size="sm"  ></fa-icon>
+                        </a>         
+                                   
                     </span>
                     <span>
-                        <a style="margin:4px" (click)="borrar(habilidad.id)" class="btn-rigth">
+                        <a style="margin:4px" (click)="borrar(habilidad.id)" class="btn-rigth" *ngIf="isLogged">
                             <fa-icon [icon]="faTrash" size="sm"></fa-icon>
                         </a>                     
                     </span>

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/servicio/token.service';
 import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PortfolioService } from 'src/app/servicio/portfolio.service';
 import { Observable, Subscriber } from 'rxjs';
 import { PersonaDto } from 'src/app/model/persona-dto';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-editar-persona',
@@ -18,10 +19,12 @@ export class EditarPersonaComponent implements OnInit {
   selectedFotoPerfil!:File ;
   selectedFotoPortada!:File;
   user:string="";
+  persona:any []=[];
+  public event: EventEmitter<any> = new EventEmitter();
   
   
 
-  constructor(private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router  ) { 
+  constructor(public bsModalRef: BsModalRef,private activatedRoute: ActivatedRoute,private tokenService:TokenService,private portFolioService:PortfolioService ,private FormBuilder:FormBuilder,private ruta:Router  ) { 
     this.editar=this.FormBuilder.group(
       {
         
@@ -30,12 +33,13 @@ export class EditarPersonaComponent implements OnInit {
         fecha_nacimiento:['',Validators.required], 
         nacionalidad:['',Validators.required],
         direccion:['',Validators.required],
-        numero:['',Validators.required],
+        numero:['',[Validators.required,Validators.maxLength(5),Validators.pattern('^\\d+$')]],
         provincia:['',Validators.required],
         foto_portada:null,
         foto_perfil:null,
         sobre_mi:[''],
-        ocupacion:['']   
+        ocupacion:[''],
+        telefono:['',[Validators.required, Validators.maxLength(12),Validators.minLength(10),Validators.pattern('^[1-9]\\d{1,3}[\\s-]?\\d+$')]]   
     
         
         
@@ -44,33 +48,33 @@ export class EditarPersonaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.params['id']
+    //const id = this.activatedRoute.snapshot.params['id']
     //this.portFolioService.obtenerPersona(this.tokenService.getUserName()).subscribe
    
-     this.portFolioService.optenerPersonaById(id).subscribe(data=>{
-     this.user=data.email;
+     //this.portFolioService.optenerPersonaById(id).subscribe(data=>{
+    // this.user=data.email;});
       
       //this.selectedFotoPerfil=this.portFolioService.convertirBase64( data.foto_perfil);
       //this.selectedFotoPortada=this.portFolioService.convertirBase64(data.foto_portada);    
-      
-      
+    
      
-      this.editar.controls['nombre'].setValue(data.nombre);
-      this.editar.controls['apellido'].setValue(data.apellido);
-      this.editar.controls['fecha_nacimiento'].setValue(this.portFolioService.obtenerFecha(data.fecha_nacimiento));
-      this.editar.controls['nacionalidad'].setValue(data.nacionalidad);
-      this.editar.controls['direccion'].setValue(data.domicilio.direccion);
-      this.editar.controls['numero'].setValue(data.domicilio.numero);    
-      this.editar.controls['provincia'].setValue(data.domicilio.provincia);
-      this.editar.controls['sobre_mi'].setValue(data.sobre_mi);
-      this.editar.controls['ocupacion'].setValue(data.ocupacion);
-      this.id=data.id;
+      this.editar.controls['nombre'].setValue(this.persona[this.persona.findIndex(element=>element['tag']=="nombre")].value);
+      this.editar.controls['apellido'].setValue(this.persona[this.persona.findIndex(element=>element['tag']=="apellido")].value);
+      this.editar.controls['fecha_nacimiento'].setValue(this.portFolioService.obtenerFecha(this.persona[this.persona.findIndex(element=>element['tag']=="fecha_nacimiento")].value));
+      this.editar.controls['nacionalidad'].setValue(this.persona[this.persona.findIndex(element=>element['tag']=="nacionalidad")].value);
+      this.editar.controls['direccion'].setValue(this.persona[this.persona.findIndex(element=>element['tag']=="direccion")].value);
+      this.editar.controls['numero'].setValue(this.persona[this.persona.findIndex(element=>element['tag']=="numero")].value);    
+      this.editar.controls['provincia'].setValue(this.persona[this.persona.findIndex(element=>element['tag']=="provincia")].value);
+      this.editar.controls['sobre_mi'].setValue(this.persona[this.persona.findIndex(element=>element['tag']=="sobre_mi")].value);
+      this.editar.controls['ocupacion'].setValue(this.persona[this.persona.findIndex(element=>element['tag']=="ocupacion")].value);
+      this.editar.controls['telefono'].setValue(this.persona[this.persona.findIndex(element=>element['tag']=="telefono")].value);
+      //this.id=data.id;
      
       
 
 
 
-    });
+   
     
   }
   get Nombre(){
@@ -78,6 +82,9 @@ export class EditarPersonaComponent implements OnInit {
   }
   get Apellido(){
     return this.editar.get('apellido')
+  }
+  get Telefono(){
+    return this.editar.get('telefono');
   }
   get Nacionalidad(){
     return this.editar.get('nacionalidad')
@@ -88,7 +95,7 @@ export class EditarPersonaComponent implements OnInit {
   get Provincia(){
     return this.editar.get('provincia')
   }
-  get NUmero(){
+  get Numero(){
     return this.editar.get('numero')
   }
   public onFileChangedFotoPerfil(event:any) {
@@ -120,13 +127,16 @@ export class EditarPersonaComponent implements OnInit {
     formData.append('apellido',this.editar.get('apellido')?.value);
     formData.append('nacionalidad',this.editar.get('nacionalidad')?.value);
     formData.append('fecha_nacimiento',this.editar.get('fecha_nacimiento')?.value);
+    formData.append('telefono',this.editar.get('telefono')?.value);
      
     
-   this.portFolioService.upDate(this.id,formData).subscribe();
-     
+   this.portFolioService.upDate(this.persona[this.persona.findIndex(element=>element['tag']=="id")].value,formData).subscribe(res=>{
+    this.event.emit(res);
+  });
+   this.bsModalRef.hide();   
    
    //this.ruta.navigate(['/portfolio']);
-   this.ruta.navigate(['/'+`portfolio/${this.user}`]);
+   //this.ruta.navigate(['/'+`portfolio/${this.user}`]);
 
    }
 
