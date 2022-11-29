@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { PortfolioService } from 'src/app/servicio/portfolio.service';
@@ -147,6 +147,11 @@ export class EducacionComponent implements OnInit {
       }
       obtenerEducacion(id:number){
         return  this.educaciones.find(element => element.id==id);
+      }
+      openModalDetalle(id:number,template: TemplateRef<any>){
+        this.educacion=this.obtenerEducacion(id);
+        this.bsModalRef = this.modalService.show(template, {class: 'modal-lg'});
+
       }
 
 }

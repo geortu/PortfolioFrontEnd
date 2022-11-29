@@ -14,7 +14,6 @@ import { PortfolioComponent } from './componentes/portfolio/portfolio.component'
 import { InterceptorService } from './servicio/interceptor.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PortfolioService } from './servicio/portfolio.service';
-import { RegistroComponent } from './componentes/registro/registro.component';
 import { EditarPersonaComponent } from './componentes/editar-persona/editar-persona.component';
 import { ExperiencialaboralComponent } from './componentes/experiencialaboral/experiencialaboral.component';
 import { EducacionComponent } from './componentes/educacion/educacion.component';
@@ -27,6 +26,9 @@ import { HabilidadesComponent } from './componentes/habilidades/habilidades.comp
 import { NuevaHabilidadComponent } from './componentes/nueva-habilidad/nueva-habilidad.component';
 import { EditarHabilidadComponent } from './componentes/editar-habilidad/editar-habilidad.component';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { ProyectoComponent } from './componentes/proyecto/proyecto.component';
+import { NuevoProyectoComponent } from './componentes/nuevo-proyecto/nuevo-proyecto.component';
+import { EditarProyectoComponent } from './componentes/editar-proyecto/editar-proyecto.component';
 
 
 @NgModule({
@@ -36,8 +38,8 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
     EncabezadoComponent,
     AcercaDeComponent,
     IniciarSesionComponent,
-    PortfolioComponent,  
-    RegistroComponent, EditarPersonaComponent, ExperiencialaboralComponent, EducacionComponent, EditarExpereincialaboralComponent, NuevaExperienciaComponent, NuevaEducacionComponent, EditarEducacionComponent, HabilidadesComponent, NuevaHabilidadComponent, EditarHabilidadComponent
+     PortfolioComponent,  
+     EditarPersonaComponent, ExperiencialaboralComponent, EducacionComponent, EditarExpereincialaboralComponent, NuevaExperienciaComponent, NuevaEducacionComponent, EditarEducacionComponent, HabilidadesComponent, NuevaHabilidadComponent, EditarHabilidadComponent, ProyectoComponent, NuevoProyectoComponent, EditarProyectoComponent
   ],
   imports: [
     ModalModule.forRoot(),    

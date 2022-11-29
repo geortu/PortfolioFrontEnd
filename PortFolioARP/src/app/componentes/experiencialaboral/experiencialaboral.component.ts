@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -163,6 +163,11 @@ export class ExperiencialaboralComponent implements OnInit {
       }
       obtenerExperiencia(id:number){
         return  this.experiencias.find(element => element.id==id);
+      }
+      openModalDetalle(id:number,template: TemplateRef<any>){
+        this.experiencia=this.obtenerExperiencia(id);
+        this.bsModalRef = this.modalService.show(template, {class: 'modal-lg'});
+
       }
   
 

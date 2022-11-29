@@ -1,0 +1,90 @@
+<div class="modal fade" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title pull-left">Editar Proyecto</h4>
+                <button type="button" class="close btn-close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form [formGroup]="editar" class="row g-3" (ngSubmit)="onUpdate()" novalidate>
+
+                    <div class="col-md-6">
+                        <label for="nombre" class="form-label">Nombre</label>
+
+                        <input type="text" formControlName="nombre" class="form-control"
+                            [ngClass]="{'is-invalid':Nombre?.errors && Nombre?.touched,'is-valid':!Nombre?.errors && Nombre?.touched}">
+
+
+                        <div *ngIf="Nombre?.errors && Nombre?.touched" class="mb-3">
+                            <span *ngIf="Nombre?.hasError('required')" class="text-danger">
+                                El nombre del proyecto es requerido
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input type="date" formControlName="fecha" class="form-control"
+                            [ngClass]="{'is-invalid':Fecha?.errors && Fecha?.touched,'is-valid':!Fecha?.errors && Fecha?.touched}">
+
+                        <div *ngIf="Fecha?.errors && Fecha?.touched">
+                            <!--  <span>{{editar.get('fecha_fin')?.errors | json}}</span>-->
+                            <p *ngIf="Fecha?.hasError('required')" class="text-danger">
+                                La fecha es requeria
+                            </p>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <label for="descripcion" class="form-label">Descripcion</label>
+                         <!--<input type="text" formControlName="descripcion" class="form-control"
+                           [ngClass]="{'is-invalid':Descripcion?.errors && Descripcion?.touched,'is-valid':!Descripcion?.errors && Descripcion?.touched}">-->
+                           <textarea formControlName="descripcion" class="form-control"
+                           [ngClass]="{'is-invalid':Descripcion?.errors && Descripcion?.touched,'is-valid':!Descripcion?.errors && Descripcion?.touched}" ></textarea>
+                        <div *ngIf="Descripcion?.errors && Descripcion?.touched" class="mb-3">
+                            <span *ngIf="Descripcion?.hasError('required')" class="text-danger">
+                                La descripcion es requerido
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-12">
+                        <label for="link" class="form-label">Direccion Web</label>
+                        <input formControlName="link" class="form-control" type="text" class="form-control"
+                            [ngClass]="{'is-invalid':Link?.errors && Link?.touched,'is-valid':!Link?.errors && Link?.touched}">
+                        <div *ngIf="Link?.errors && Link?.touched">
+
+                            <p *ngIf="Link?.hasError('required')" class="text-danger">
+                                La direccion web es requeria
+                            </p>
+
+                        </div>
+                    </div>
+
+
+                    <!--  <div class="col-md-5">
+            <button type="submit" class="btn btn-primary" [disabled]="!editar.valid">
+               Guardar
+            </button>
+            <button style="margin-left:10px" type="reset"  class="btn btn-danger" (click)="cancelar()">
+                Cancelar
+             </button>
+           
+        </div> -->
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-dark" (click)="onUpdate()" [disabled]="!editar.valid"
+                    data-bs-dismiss="modal"> Actualizar </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -77,26 +77,8 @@
    
     
 }
-@keyframes loading-1{
-    from {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    to{
-        -webkit-transform: rotate(180deg);
-         transform: rotate(180deg);
-    }
-}
-@keyframes loading-2{
-    from{
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    to{
-        -webkit-transform:  rotate(180deg) ;
-         transform: rotate(180deg);
-    }
-}
+
+
 .progress .progress-bar{
     border-color: #84A1A2;
 }

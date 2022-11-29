@@ -9,21 +9,14 @@ import { NuevaEducacionComponent } from './componentes/nueva-educacion/nueva-edu
 import { NuevaExperienciaComponent } from './componentes/nueva-experiencia/nueva-experiencia.component';
 import { NuevaHabilidadComponent } from './componentes/nueva-habilidad/nueva-habilidad.component';
 import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
-import { RegistroComponent } from './componentes/registro/registro.component';
+
 import { GuardGuard } from './servicio/guard.guard';
 
 
 const routes: Routes = [
   //{path:'portfolio/:user',component:PortfolioComponent},
   {path:'portfolio',component:PortfolioComponent},
-  {path:'iniciar-sesion',component:IniciarSesionComponent},
-  {path:'registro',component:RegistroComponent},
-  {path:'editar-persona/:id',component:EditarPersonaComponent},
-  {path:'editar-expereincialaboral/:id',component:EditarExpereincialaboralComponent},
-  {path:'editar-educacion/:id',component:EditarEducacionComponent},
-  {path:'nueva-educacion/:id',component:NuevaEducacionComponent},
-  {path:'nueva-experiencia/:id',component:NuevaExperienciaComponent},  
-  //{path:'',redirectTo:'iniciar-sesion',pathMatch:'full'}
+  {path:'iniciar-sesion',component:IniciarSesionComponent},  
   {path:'',redirectTo:'portfolio',pathMatch:'full'}
 ];
 
