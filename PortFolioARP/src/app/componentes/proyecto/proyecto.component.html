@@ -20,15 +20,16 @@
         <ul class="items-list">
             <li *ngFor="let proyecto of proyectos">
                 <div class="data-container">
-                    <a href="#">
+                    
                         
                         <div class="list-info">
                             <h3>{{proyecto.nombre}}</h3>
                              <p>{{proyecto.descripcion}}</p>
+                             <p> <a [href]="proyecto.link">{{proyecto.link}}</a></p>
                             <h5><time>{{proyecto.fecha}}</time> </h5>
                         </div>
 
-                    </a>
+                    
                 </div>
                 <div class="data-control" *ngIf="isLogged">
                     <div class="btn-edit">
@@ -52,3 +53,4 @@
         </ul>
     </div>
 </div>
+

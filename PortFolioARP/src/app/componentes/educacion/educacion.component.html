@@ -21,14 +21,14 @@
         <ul class="items-list">
             <li *ngFor="let educacion of educaciones">
                 <div class="data-container">
-                    <a href="#">
+                    <a (click)="openModalDetalle(educacion.id,template)">
                         <div class="logo-image-container">
                             <img  [src]="educacion.logo" alt="">
                         </div>
                         <div class="list-info">
                             <h3>{{educacion.establecimiento}}</h3>
                              <p>{{educacion.titulo}}</p>
-                            <h5><time>{{educacion.inicio}}</time> - <time>{{educacion.fin}}</time></h5>
+                            <h5><time>{{obtnerAnoFecha(educacion.inicio)}}</time> - <time>{{obtnerAnoFecha(educacion.fin)}}</time></h5>
                         </div>
 
                     </a>
@@ -65,7 +65,7 @@
     <div class="modal-body">
      <p><strong> Titulo:</strong> {{educacion.titulo}} <strong> Promedio:</strong> {{educacion.puntaje}}</p>
      <p> <strong> Carrera:</strong> {{educacion.carrera}}</p>
-     <p><strong> Fecha Inicio:</strong> <time> {{fechaInicio}}</time>  <strong> Fecha Fin:</strong> <time> {{fechaFin}}</time></p>
+     <p><strong> Fecha Inicio:</strong> <time> {{educacion.inicio}}</time>  <strong> Fecha Fin:</strong> <time> {{educacion.fin}}</time></p>
     
     </div>
     <div class="modal-footer">

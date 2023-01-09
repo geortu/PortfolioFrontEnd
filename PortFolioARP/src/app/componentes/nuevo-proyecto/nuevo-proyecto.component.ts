@@ -55,7 +55,7 @@ export class NuevoProyectoComponent implements OnInit {
     const formData=new FormData();
    
     formData.append('nombre',this.editar.get('nombre')?.value);    
-    formData.append('link',this.editar.get('')?.value);
+    formData.append('link',this.editar.get('link')?.value);
     formData.append('fecha',this.editar.get('fecha')?.value);    
     formData.append('descripcion',this.editar.get('descripcion')?.value);
     formData.append('id_persona',this.id[0].value);

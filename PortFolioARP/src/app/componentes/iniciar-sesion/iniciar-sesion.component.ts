@@ -84,7 +84,11 @@ export class IniciarSesionComponent implements OnInit {
         
           this.isLogged=false;
           this.isLoginFail=true;
-          this.errMsj=err.error.error;
+          if(err.error.error==  "Unauthorized") {
+            this.errMsj="Usuario o Contraseña Incorrecta";
+
+          }
+          
           
         }
        

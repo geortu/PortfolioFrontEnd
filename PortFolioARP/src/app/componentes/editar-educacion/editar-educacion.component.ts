@@ -57,12 +57,11 @@ export class EditarEducacionComponent implements OnInit {
       this.editar.controls['inicio'].setValue(this.portFolioService.obtenerFecha(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="inicio")].value));
       this.editar.controls['fin'].setValue(this.portFolioService.obtenerFecha(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="fin")].value));
       this.editar.controls['carrera'].setValue(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="carrera")].value); 
-      this.editar.controls['puntaje'].setValue(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="puntaje")].valuee);  
+      this.editar.controls['puntaje'].setValue(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="puntaje")].value);  
       this.fechaInicio= this.portFolioService.obtenerFecha(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="inicio")].value);
       this.fechaFin=this.portFolioService.obtenerFecha(this.educaciones[this.educaciones.findIndex(element=>element['tag']=="fin")].value);
      
-
-
+     
    
 
 

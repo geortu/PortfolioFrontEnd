@@ -128,9 +128,7 @@ export class HabilidadesComponent implements OnInit {
 
   
   borrar(id:number){
-    this.borrarArray(id);
-    console.log(id);
-      
+    this.borrarArray(id);    
     this.portFolio.borrar(id,this.path).subscribe();
    
     
@@ -151,12 +149,12 @@ export class HabilidadesComponent implements OnInit {
  
     this.bsModalRef = this.modalService.show(NuevaHabilidadComponent,{initialState ,class: 'modal-lg'} );
      this.bsModalRef.content.closeBtnName = 'Close';    
-      this.bsModalRef.content.event.subscribe((res: { nombre: any; porcentaje: any; id_persona: any; }) => {
+      this.bsModalRef.content.event.subscribe((res: { nombre: any; porcentaje: any; id: any; }) => {
       this.habilidades.push({
         
         nombre:res.nombre,
         porcentaje:res.porcentaje,
-        id:res.id_persona
+        id:res.id
       });
     });
   

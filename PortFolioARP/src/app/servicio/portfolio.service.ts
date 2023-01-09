@@ -10,7 +10,8 @@ import { PersonaDto } from '../model/persona-dto';
   providedIn: 'root'
 })
 export class PortfolioService {
-  url:string="http://localhost:8080/";
+   url:string="https://portfolio-jorge.onrender.com/";
+  //url:string="http://localhost:8080/";
   myimage!: Observable<any>;
   base64code: any;
   
@@ -55,8 +56,8 @@ export class PortfolioService {
  
 
   obtenerFecha(fecha:string):string{
-    var nuevaFecha:string=""
-    var indice= fecha.indexOf("/");
+    var nuevaFecha:string="";    
+    var indice = fecha.indexOf("/");
     if(indice==-1){
       return fecha;
     }else{      
@@ -69,6 +70,10 @@ export class PortfolioService {
        return nuevaFecha;
        }
     }
+    
+
+   
+    
     
   }
   convertToBase64(file: File) {

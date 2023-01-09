@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faPen, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -32,18 +32,19 @@ export class ProyectoComponent implements OnInit {
     this.isLogged=this.tokenService.getToken()==null? false:true;
     this.portFolio.obtenerDatos().subscribe((data)=>{
       this.id_persona=data[0].id;
-      this.response = data[0].proyectos;   
+      this.response = data[0].proyectos;  
+       
       
       this.response.forEach((element: {
         id: any; nombre: any;  fecha: string; fecha_fin: string; descripcion: any; link: any; 
 }) => {
-        this.fechaInicio=element.fecha;
+       ;
         
         this.proyectos.push({
         id:element.id,
         nombre:element.nombre,
         descripcion:element.descripcion,
-        fecha:new Date(this.portFolio.obtenerFecha(element.fecha).toString()),        
+        fecha:this.portFolio.obtenerFecha(element.fecha),        
         link:element.link
         
         
@@ -91,7 +92,7 @@ export class ProyectoComponent implements OnInit {
           id:res.id,
           nombre:res.nombre,
           descripcion:res.descripcion,
-          fecha:new Date(this.portFolio.obtenerFecha(res.fecha).toString()),        
+          fecha:this.portFolio.obtenerFecha(res.fecha),        
           link:res.link
         });
       });
@@ -100,14 +101,14 @@ export class ProyectoComponent implements OnInit {
     }
     openModalEditar(id:number) {
       
-      this.proyecto=this.obtenerExperiencia(id);
+      this.proyecto=this.obtenerProyecto(id);
       
       const initialState = {
             proyectos: [
               {"tag":'id',"value":this.proyecto.id},
               {"tag":'nombre',"value":this.proyecto.nombre},
               {"tag":'descripcion',"value":this.proyecto.descripcion},
-              {"tag":'fecha',"value":this.fechaInicio},
+              {"tag":'fecha',"value":this.proyecto.fecha},
               {"tag":'link',"value":this.proyecto.link},
              
              
@@ -129,14 +130,16 @@ export class ProyectoComponent implements OnInit {
           link: any;
           nombre: any;
           id: any;
+
           
 }) => {
+        this.borrarArray(res.id);
         this.proyectos.push({
           
           id:res.id,
           nombre:res.nombre,
           descripcion:res.descripcion,
-          fecha:new Date(this.portFolio.obtenerFecha(res.fecha).toString()),        
+          fecha:this.portFolio.obtenerFecha(res.fecha),        
           link:res.link
         });
       });
@@ -144,8 +147,10 @@ export class ProyectoComponent implements OnInit {
       
         
       }
-      obtenerExperiencia(id:number){
+      obtenerProyecto(id:number){
         return  this.proyectos.find(element => element.id==id);
       }
+      
+
 
 }

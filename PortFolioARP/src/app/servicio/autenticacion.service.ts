@@ -10,10 +10,11 @@ import { JwtDto } from '../model/jwt-dto';
   providedIn: 'root'
 })
 export class AutenticacionService {
-url="http://localhost:8080/auth/";
+  url:string="https://portfolio-jorge.onrender.com/auth/";
+ //url="http://localhost:8080/auth/";
 currentUserSubject:BehaviorSubject<any>;
   constructor(private http:HttpClient) { 
-   //console.log("El servicio de autenticacion esta corriendo");
+   
   
   this.currentUserSubject=new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem("currentSubjet") ||'{}'));
   

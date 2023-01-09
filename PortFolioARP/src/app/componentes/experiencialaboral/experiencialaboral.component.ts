@@ -45,14 +45,13 @@ export class ExperiencialaboralComponent implements OnInit {
       this.response.forEach((element: {
         id: any; nombre_empresa: any; puesto: any; fecha_inicio: string; fecha_fin: string; descripcion: any; logo: File; 
 }) => {
-        this.fechaInicio=element.fecha_inicio;
-        this.fechaFin=element.fecha_fin;
+        
         this.experiencias.push({
         id:element.id,
         nombre_empresa:element.nombre_empresa,
         puesto:element.puesto,
-        fecha_inicio:new Date(this.portFolio.obtenerFecha(element.fecha_inicio).toString()).getFullYear(),
-        fecha_fin:new Date(this.portFolio.obtenerFecha(element.fecha_fin).toString()).getFullYear(),
+        fecha_inicio:this.portFolio.obtenerFecha(element.fecha_inicio),
+        fecha_fin:this.portFolio.obtenerFecha(element.fecha_fin),
         descripcion:element.descripcion,
         logo:this.portFolio.convertirBase64(element.logo)
         
@@ -63,7 +62,7 @@ export class ExperiencialaboralComponent implements OnInit {
        
     });
     
-   //Pedndiente el ordenamiento  
+    this.ordenarArray(); 
     
   }
   borrarExperiencia(id:number){
@@ -104,13 +103,14 @@ export class ExperiencialaboralComponent implements OnInit {
         id:res.id,
         nombre_empresa:res.nombre_empresa,
         puesto:res.puesto,
-        fecha_inicio:new Date(this.portFolio.obtenerFecha(res.fecha_inicio).toString()).getFullYear(),
-        fecha_fin:new Date(this.portFolio.obtenerFecha(res.fecha_fin).toString()).getFullYear(),
+        fecha_inicio:this.portFolio.obtenerFecha(res.fecha_inicio),
+        fecha_fin:this.portFolio.obtenerFecha(res.fecha_fin),
         descripcion:res.descripcion,
         logo:this.portFolio.convertirBase64(res.logo)
         });
       });
-    
+
+    this.ordenarArray();
       
     }
     openModalEditar(id:number) {
@@ -122,8 +122,8 @@ export class ExperiencialaboralComponent implements OnInit {
               {"tag":'id',"value":this.experiencia.id},
               {"tag":'nombre_empresa',"value":this.experiencia.nombre_empresa},
               {"tag":'puesto',"value":this.experiencia.puesto},
-              {"tag":'fecha_inicio',"value":this.fechaInicio},
-              {"tag":'fecha_fin',"value":this.fechaFin},
+              {"tag":'fecha_inicio',"value":this.experiencia.fecha_inicio},
+              {"tag":'fecha_fin',"value":this.experiencia.fecha_fin},
               {"tag":'descripcion',"value":this.experiencia.descripcion}
              
             
@@ -150,14 +150,14 @@ export class ExperiencialaboralComponent implements OnInit {
             id:res.id,
             nombre_empresa:res.nombre_empresa,
             puesto:res.puesto,
-            fecha_inicio:new Date(this.portFolio.obtenerFecha(res.fecha_inicio).toString()).getFullYear(),
-            fecha_fin:new Date(this.portFolio.obtenerFecha(res.fecha_fin).toString()).getFullYear(),
+            fecha_inicio:this.portFolio.obtenerFecha(res.fecha_inicio).toString(),
+            fecha_fin:this.portFolio.obtenerFecha(res.fecha_fin),
             descripcion:res.descripcion,
             logo:this.portFolio.convertirBase64(res.logo)
             
           });
         });
-      
+        this.ordenarArray();
       
         
       }
@@ -167,6 +167,23 @@ export class ExperiencialaboralComponent implements OnInit {
       openModalDetalle(id:number,template: TemplateRef<any>){
         this.experiencia=this.obtenerExperiencia(id);
         this.bsModalRef = this.modalService.show(template, {class: 'modal-lg'});
+
+      }
+      obtnerAnoFecha(fecha:string):string{
+        var a =new Date(fecha).getFullYear().toString();
+        return a;
+      }
+      ordenarArray(){
+        this.experiencias.sort(function (a, b) {
+          if (a.id > b.id) {
+            return 1;
+          }
+          if (a.id < b.id) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
 
       }
   

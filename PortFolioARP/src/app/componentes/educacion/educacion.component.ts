@@ -38,14 +38,13 @@ export class EducacionComponent implements OnInit {
     this.response.forEach((element: {
       puntaje: any; id: any; establecimiento: any; titulo: any; inicio: string; fin: string; carrera: any; logo: File; 
 }) => {
-     this.fechaInicio=element.inicio;
-      this.fechaFin=element.fin;
+     
       this.educaciones.push({
       id:element.id,
       establecimiento:element.establecimiento,
       titulo:element.titulo,
-      inicio:new Date(this.portFolio.obtenerFecha(element.inicio).toString()).getFullYear(),
-      fin:new Date(this.portFolio.obtenerFecha(element.fin).toString()).getFullYear(),
+      inicio:this.portFolio.obtenerFecha(element.inicio),
+      fin:this.portFolio.obtenerFecha(element.fin).toString(),
       carrera:element.carrera,
       puntaje:element.puntaje,
       logo:this.portFolio.convertirBase64(element.logo)
@@ -91,8 +90,8 @@ export class EducacionComponent implements OnInit {
           id:res.id,
           establecimiento:res.establecimiento,
           titulo:res.titulo,
-          inicio:new Date(this.portFolio.obtenerFecha(res.inicio).toString()).getFullYear(),
-          fin:new Date(this.portFolio.obtenerFecha(res.fin).toString()).getFullYear(),
+          inicio:this.portFolio.obtenerFecha(res.inicio),
+          fin:this.portFolio.obtenerFecha(res.fin),
           carrera:res.carrera,
           puntaje:res.puntaje,
           logo:this.portFolio.convertirBase64(res.logo)
@@ -110,8 +109,8 @@ export class EducacionComponent implements OnInit {
               {"tag":'id',"value":this.educacion.id},
               {"tag":'establecimiento',"value":this.educacion.establecimiento},
               {"tag":'titulo',"value":this.educacion.titulo},
-              {"tag":'inicio',"value":this.fechaInicio},
-              {"tag":'fin',"value":this.fechaFin},
+              {"tag":'inicio',"value":this.educacion.inicio},
+              {"tag":'fin',"value":this.educacion.fin},
               {"tag":'carrera',"value":this.educacion.carrera},
               {"tag":'puntaje',"value":this.educacion.puntaje}
              
@@ -129,13 +128,14 @@ export class EducacionComponent implements OnInit {
         this.bsModalRef.content.event.subscribe((res: {
           puntaje: any; id: any; establecimiento: any; titulo: any; inicio: string; fin: string; carrera: any; logo: File; 
 }) => {
+        this.borrarArray(res.id);
         this.educaciones.push({
           
           id:res.id,
           establecimiento:res.establecimiento,
           titulo:res.titulo,
-          inicio:new Date(this.portFolio.obtenerFecha(res.inicio).toString()).getFullYear(),
-          fin:new Date(this.portFolio.obtenerFecha(res.fin).toString()).getFullYear(),
+          inicio:this.portFolio.obtenerFecha(res.inicio),
+          fin:this.portFolio.obtenerFecha(res.fin),
           carrera:res.carrera,
           puntaje:res.puntaje,
           logo:this.portFolio.convertirBase64(res.logo)
@@ -152,6 +152,10 @@ export class EducacionComponent implements OnInit {
         this.educacion=this.obtenerEducacion(id);
         this.bsModalRef = this.modalService.show(template, {class: 'modal-lg'});
 
+      }
+      obtnerAnoFecha(fecha:string):string{
+        var a =new Date(fecha).getFullYear().toString();
+        return a;
       }
 
 }

@@ -27,7 +27,7 @@
                         <div class="list-info">
                             <h3>{{experiencia.puesto}}</h3>
                              <p>{{experiencia.nombre_empresa}}</p>
-                            <h5><time>{{experiencia.fecha_inicio}}</time> - <time>{{experiencia.fecha_fin}}</time></h5>
+                            <h5><time>{{obtnerAnoFecha(experiencia.fecha_inicio)}}</time> - <time>{{obtnerAnoFecha(experiencia.fecha_fin)}}</time></h5>
                         </div>
 
                     </a>
@@ -64,7 +64,7 @@
     <div class="modal-body">
      <p><strong> Puesto:</strong> {{experiencia.puesto}}</p>
      <p> <strong> Descripcion:</strong> {{experiencia.descripcion}}</p>
-     <p><strong> Fecha Inicio:</strong> <time> {{fechaInicio}}</time>  <strong> Fecha Fin:</strong> <time> {{fechaFin}}</time></p>
+     <p><strong> Fecha Inicio:</strong> <time> {{experiencia.fecha_inicio}}</time>  <strong> Fecha Fin:</strong> <time> {{experiencia.fecha_fin}}</time></p>
     
     </div>
     <div class="modal-footer">

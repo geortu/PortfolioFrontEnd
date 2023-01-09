@@ -34,8 +34,8 @@ export class EditarProyectoComponent implements OnInit {
 
   ngOnInit(): void {
     this.editar.controls['nombre'].setValue(this.proyectos[this.proyectos.findIndex(element=>element['tag']=="nombre")].value);
-    this.editar.controls['descripcion'].setValue(this.proyectos[this.proyectos.findIndex(element=>element['tag']=="puesto")].value);
-    this.editar.controls['fecha'].setValue(this.portFolioService.obtenerFecha(this.proyectos[this.proyectos.findIndex(element=>element['tag']=="fecha_inicio")].value));
+    this.editar.controls['descripcion'].setValue(this.proyectos[this.proyectos.findIndex(element=>element['tag']=="descripcion")].value);
+    this.editar.controls['fecha'].setValue(this.portFolioService.obtenerFecha(this.proyectos[this.proyectos.findIndex(element=>element['tag']=="fecha")].value));
     this.editar.controls['link'].setValue(this.proyectos[this.proyectos.findIndex(element=>element['tag']=="link")].value);
   }
   get Nombre(){
@@ -56,7 +56,7 @@ export class EditarProyectoComponent implements OnInit {
     const formData=new FormData();
    
     formData.append('nombre',this.editar.get('nombre')?.value);    
-    formData.append('link',this.editar.get('')?.value);
+    formData.append('link',this.editar.get('link')?.value);
     formData.append('fecha',this.editar.get('fecha')?.value);    
     formData.append('descripcion',this.editar.get('descripcion')?.value);
     

@@ -47,8 +47,10 @@
             <fa-icon [icon]="Icon"></fa-icon> Iniciar Sesion
           </button>
         </div>
+        <div class="form-group" *ngIf="isLoginFail" class="alert alert-danger mb-3">{{errMsj}}</div>
       </form>
-      <div class="form-group" *ngIf="isLoginFail" class="alert alert-danger mb-3">{{errMsj}}</div>
+    
+     
     
   </div>
      

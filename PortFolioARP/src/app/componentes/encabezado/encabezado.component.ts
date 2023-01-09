@@ -60,9 +60,9 @@ export class EncabezadoComponent implements OnInit {
             {"tag":'sobre_mi',"value":this.miPortfolios.sobre_mi},
             {"tag":'telefono',"value":this.miPortfolios.telefono},
             {"tag":'ocupacion',"value":this.miPortfolios.ocupacion},
-            {"tag":'direccion',"value":this.miPortfolios.domicilio.direccion},
-            {"tag":'numero',"value":this.miPortfolios.domicilio.numero},
-            {"tag":'provincia',"value":this.miPortfolios.domicilio.provincia}
+            {"tag":'direccion',"value":this.miPortfolios?.domicilio?.direccion},
+            {"tag":'numero',"value":this.miPortfolios?.domicilio?.numero},
+            {"tag":'provincia',"value":this.miPortfolios?.domicilio?.provincia}
            
           
           ]

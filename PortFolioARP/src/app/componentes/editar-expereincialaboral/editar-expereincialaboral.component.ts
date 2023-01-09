@@ -48,6 +48,8 @@ export class EditarExpereincialaboralComponent implements OnInit {
     //this.portFolioService.obtenerById(this.id,this.path).subscribe(data =>{
       
       //this.user=data.persona.email;});
+
+
       this.editar.controls['nombre_empresa'].setValue(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="nombre_empresa")].value);
       this.editar.controls['puesto'].setValue(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="puesto")].value);
       this.editar.controls['fecha_inicio'].setValue(this.portFolioService.obtenerFecha(this.experiencias[this.experiencias.findIndex(element=>element['tag']=="fecha_inicio")].value));
@@ -171,5 +173,6 @@ onUpdate(): void {
   this.ruta.navigate(['/portfolio']);
 
 }
+
 
 }
